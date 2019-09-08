@@ -48,6 +48,7 @@ type Namespace struct {
 // Emojify returns a copy of s with all emoji codes replaced with actual emojis.
 //
 // See http://www.emoji-cheat-sheet.com/
+/*
 func (ns *Namespace) Emojify(s interface{}) (template.HTML, error) {
 	ss, err := cast.ToStringE(s)
 	if err != nil {
@@ -56,6 +57,7 @@ func (ns *Namespace) Emojify(s interface{}) (template.HTML, error) {
 
 	return template.HTML(helpers.Emojify([]byte(ss))), nil
 }
+*/
 
 // Highlight returns a copy of s as an HTML string with syntax
 // highlighting applied.

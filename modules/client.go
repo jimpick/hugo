@@ -25,7 +25,7 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/gohugoio/hugo/hugofs/files"
+	// "github.com/gohugoio/hugo/hugofs/files"
 
 	"github.com/gohugoio/hugo/common/loggers"
 
@@ -36,7 +36,7 @@ import (
 
 	"github.com/rogpeppe/go-internal/module"
 
-	"github.com/gohugoio/hugo/common/hugio"
+	// "github.com/gohugoio/hugo/common/hugio"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/afero"
@@ -183,6 +183,7 @@ func (c *Client) Tidy() error {
 // Given a module tree, Hugo will pick the first module for a given path,
 // meaning that if the top-level module is vendored, that will be the full
 // set of dependencies.
+/*
 func (c *Client) Vendor() error {
 	vendorDir := filepath.Join(c.ccfg.WorkingDir, vendord)
 	if err := c.rmVendorDir(vendorDir); err != nil {
@@ -256,6 +257,7 @@ func (c *Client) Vendor() error {
 
 	return nil
 }
+*/
 
 // Get runs "go get" with the supplied arguments.
 func (c *Client) Get(args ...string) error {

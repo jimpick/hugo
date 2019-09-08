@@ -635,12 +635,14 @@ Loop:
 
 			rn.AddShortcode(currShortcode)
 
+			/*
 		case it.Type == pageparser.TypeEmoji:
 			if emoji := helpers.Emoji(it.ValStr()); emoji != nil {
 				rn.AddReplacement(emoji, it)
 			} else {
 				rn.AddBytes(it)
 			}
+			*/
 		case it.IsEOF():
 			break Loop
 		case it.IsError():

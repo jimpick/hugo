@@ -29,12 +29,14 @@ func init() {
 			Context: func(args ...interface{}) interface{} { return ctx },
 		}
 
+		/*
 		ns.AddMethodMapping(ctx.Emojify,
 			[]string{"emojify"},
 			[][2]string{
 				{`{{ "I :heart: Hugo" | emojify }}`, `I ❤️ Hugo`},
 			},
 		)
+		*/
 
 		ns.AddMethodMapping(ctx.Highlight,
 			[]string{"highlight"},
