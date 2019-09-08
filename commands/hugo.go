@@ -26,7 +26,7 @@ import (
 
 	"github.com/gohugoio/hugo/hugofs"
 
-	"github.com/gohugoio/hugo/resources/page"
+	// "github.com/gohugoio/hugo/resources/page"
 
 	"github.com/pkg/errors"
 
@@ -53,7 +53,7 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/gohugoio/hugo/helpers"
 	"github.com/gohugoio/hugo/hugolib"
-	"github.com/gohugoio/hugo/livereload"
+	// "github.com/gohugoio/hugo/livereload"
 	"github.com/gohugoio/hugo/watcher"
 	"github.com/spf13/afero"
 	"github.com/spf13/cobra"
@@ -801,7 +801,7 @@ func (c *commandeer) fullRebuild(changeType string) {
 			if err != nil {
 				c.logger.ERROR.Println(err)
 			} else if !c.h.buildWatch && !c.Cfg.GetBool("disableLiveReload") {
-				livereload.ForceRefresh()
+				// livereload.ForceRefresh()
 			}
 		}
 	}()
@@ -846,7 +846,7 @@ func (c *commandeer) newWatcher(dirList ...string) (*watcher.Batcher, error) {
 				c.handleEvents(watcher, staticSyncer, evs, configSet)
 				if c.showErrorInBrowser && c.errCount() > 0 {
 					// Need to reload browser to show the error
-					livereload.ForceRefresh()
+					// livereload.ForceRefresh()
 				}
 			case err := <-watcher.Errors:
 				if err != nil {
@@ -1071,6 +1071,7 @@ func (c *commandeer) handleEvents(watcher *watcher.Batcher,
 			}
 		}
 
+		/*
 		if !c.h.buildWatch && !c.Cfg.GetBool("disableLiveReload") {
 			// Will block forever trying to write to a channel that nobody is reading if livereload isn't initialized
 
@@ -1084,8 +1085,10 @@ func (c *commandeer) handleEvents(watcher *watcher.Batcher,
 				livereload.ForceRefresh()
 			}
 		}
+		*/
 	}
 
+	/*
 	if len(dynamicEvents) > 0 {
 		partitionedEvents := partitionDynamicEvents(
 			c.firstPathSpec().BaseFs.SourceFilesystems,
@@ -1135,6 +1138,7 @@ func (c *commandeer) handleEvents(watcher *watcher.Batcher,
 			}
 		}
 	}
+	*/
 }
 
 // dynamicEvents contains events that is considered dynamic, as in "not static".
