@@ -18,7 +18,7 @@ package page
 import (
 	"html/template"
 
-	"github.com/bep/gitmap"
+	// "github.com/bep/gitmap"
 	"github.com/gohugoio/hugo/config"
 
 	"github.com/gohugoio/hugo/common/hugo"
@@ -96,9 +96,11 @@ type GetPageProvider interface {
 }
 
 // GitInfoProvider provides Git info.
+/*
 type GitInfoProvider interface {
 	GitInfo() *gitmap.GitInfo
 }
+*/
 
 // InSectionPositioner provides section navigation.
 type InSectionPositioner interface {
@@ -216,7 +218,7 @@ type PageWithoutContent interface {
 	// For pages backed by a file.
 	FileProvider
 
-	GitInfoProvider
+	// GitInfoProvider
 
 	// Output formats
 	OutputFormatsProvider

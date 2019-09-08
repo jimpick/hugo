@@ -16,7 +16,7 @@ package hugolib
 import (
 	"sync"
 
-	"github.com/bep/gitmap"
+	// "github.com/bep/gitmap"
 	"github.com/gohugoio/hugo/common/maps"
 	"github.com/gohugoio/hugo/compare"
 	"github.com/gohugoio/hugo/lazy"
@@ -47,7 +47,7 @@ type pageCommon struct {
 	page.ChildCareProvider
 	page.FileProvider
 	page.GetPageProvider
-	page.GitInfoProvider
+	// page.GitInfoProvider
 	page.InSectionPositioner
 	page.OutputFormatsProvider
 	page.PageMetaProvider
@@ -79,7 +79,7 @@ type pageCommon struct {
 	pageContent
 
 	// Set if feature enabled and this is in a Git repo.
-	gitInfo *gitmap.GitInfo
+	// gitInfo *gitmap.GitInfo
 
 	// Positional navigation
 	posNextPrev        *nextPrev

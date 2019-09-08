@@ -21,7 +21,7 @@ import (
 
 	"github.com/gohugoio/hugo/hugofs"
 
-	"github.com/bep/gitmap"
+	// "github.com/bep/gitmap"
 	"github.com/gohugoio/hugo/navigation"
 
 	"github.com/gohugoio/hugo/common/hugo"
@@ -172,9 +172,11 @@ func (p *nopPage) GetParam(key string) interface{} {
 	return nil
 }
 
+/*
 func (p *nopPage) GitInfo() *gitmap.GitInfo {
 	return nil
 }
+*/
 
 func (p *nopPage) HasMenuCurrent(menuID string, me *navigation.MenuEntry) bool {
 	return false

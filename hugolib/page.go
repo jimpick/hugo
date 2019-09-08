@@ -27,7 +27,7 @@ import (
 
 	"github.com/gohugoio/hugo/hugofs/files"
 
-	"github.com/bep/gitmap"
+	// "github.com/bep/gitmap"
 
 	"github.com/gohugoio/hugo/helpers"
 
@@ -115,9 +115,11 @@ func (p *pageState) Eq(other interface{}) bool {
 	return p == pp
 }
 
+/*
 func (p *pageState) GitInfo() *gitmap.GitInfo {
 	return p.gitInfo
 }
+*/
 
 func (p *pageState) MarshalJSON() ([]byte, error) {
 	return page.MarshalPageToJSON(p)

@@ -354,9 +354,11 @@ func (pm *pageMeta) setMetadata(bucket *pagesMapBucket, p *pageState, frontmatte
 	}
 
 	var gitAuthorDate time.Time
+	/*
 	if p.gitInfo != nil {
 		gitAuthorDate = p.gitInfo.AuthorDate
 	}
+	*/
 
 	descriptor := &pagemeta.FrontMatterDescriptor{
 		Frontmatter:   frontmatter,

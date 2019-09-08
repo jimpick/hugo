@@ -79,7 +79,7 @@ func newPageBase(metaProvider *pageMeta) (*pageState, error) {
 	ps.pageMenus = &pageMenus{p: ps}
 	ps.PageMenusProvider = ps.pageMenus
 	ps.GetPageProvider = siteAdapter
-	ps.GitInfoProvider = ps
+	// ps.GitInfoProvider = ps
 	ps.TranslationsProvider = ps
 	ps.ResourceDataProvider = &pageData{pageState: ps}
 	ps.RawContentProvider = ps
