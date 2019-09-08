@@ -19,7 +19,6 @@ require (
 	github.com/mitchellh/hashstructure v1.0.0
 	github.com/mitchellh/mapstructure v1.1.2
 	github.com/nicksnyder/go-i18n v1.10.0
-	github.com/niklasfasching/go-org v0.1.4
 	github.com/olekukonko/tablewriter v0.0.1
 	github.com/pkg/errors v0.8.1
 	github.com/rogpeppe/go-internal v1.3.2

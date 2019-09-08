@@ -21,13 +21,13 @@ import (
 	"strings"
 
 	"github.com/gohugoio/hugo/common/herrors"
-	"github.com/niklasfasching/go-org/org"
+	// "github.com/niklasfasching/go-org/org"
 
 	"github.com/BurntSushi/toml"
 	"github.com/pkg/errors"
 	"github.com/spf13/afero"
 	"github.com/spf13/cast"
-	jww "github.com/spf13/jwalterweatherman"
+	// jww "github.com/spf13/jwalterweatherman"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -132,8 +132,10 @@ func (d Decoder) unmarshal(data []byte, f Format, v interface{}) error {
 	var err error
 
 	switch f {
+		/*
 	case ORG:
 		err = d.unmarshalORG(data, v)
+		*/
 	case JSON:
 		err = json.Unmarshal(data, v)
 	case TOML:
@@ -203,6 +205,7 @@ func (d Decoder) unmarshalCSV(data []byte, v interface{}) error {
 
 }
 
+/*
 func (d Decoder) unmarshalORG(data []byte, v interface{}) error {
 	config := org.New()
 	config.Log = jww.WARN
@@ -230,6 +233,7 @@ func (d Decoder) unmarshalORG(data []byte, v interface{}) error {
 	}
 	return nil
 }
+*/
 
 func toFileError(f Format, err error) error {
 	return herrors.ToFileError(string(f), err)

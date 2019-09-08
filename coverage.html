@@ -136,7 +136,7 @@
 				
 				<option value="file40">github.com/gohugoio/hugo/docshelper/docs.go (50.0%)</option>
 				
-				<option value="file41">github.com/gohugoio/hugo/helpers/content.go (37.5%)</option>
+				<option value="file41">github.com/gohugoio/hugo/helpers/content.go (38.7%)</option>
 				
 				<option value="file42">github.com/gohugoio/hugo/helpers/content_renderer.go (39.1%)</option>
 				
@@ -290,7 +290,7 @@
 				
 				<option value="file117">github.com/gohugoio/hugo/parser/frontmatter.go (0.0%)</option>
 				
-				<option value="file118">github.com/gohugoio/hugo/parser/metadecoders/decoder.go (27.6%)</option>
+				<option value="file118">github.com/gohugoio/hugo/parser/metadecoders/decoder.go (33.7%)</option>
 				
 				<option value="file119">github.com/gohugoio/hugo/parser/metadecoders/format.go (20.5%)</option>
 				
@@ -6960,7 +6960,7 @@ import (
         "unicode/utf8"
 
         "github.com/gohugoio/hugo/common/maps"
-        "github.com/niklasfasching/go-org/org"
+        // "github.com/niklasfasching/go-org/org"
 
         bp "github.com/gohugoio/hugo/bufferpool"
         "github.com/gohugoio/hugo/config"
@@ -7423,8 +7423,10 @@ func (c ContentSpec) RenderBytes(ctx *RenderingContext) []byte <span class="cov8
                 return c.mmarkRender(ctx)</span>
         case "rst":<span class="cov0" title="0">
                 return getRstContent(ctx)</span>
-        case "org":<span class="cov0" title="0">
-                return orgRender(ctx, c)</span>
+                /*
+        case "org":
+                return orgRender(ctx, c)
+                */
         case "pandoc":<span class="cov0" title="0">
                 return getPandocContent(ctx)</span>
         }
@@ -7684,11 +7686,11 @@ func getPandocContent(ctx *RenderingContext) []byte <span class="cov0" title="0"
         return externallyRenderContent(ctx, path, args)</span>
 }
 
-func orgRender(ctx *RenderingContext, c ContentSpec) []byte <span class="cov0" title="0">{
+/*
+func orgRender(ctx *RenderingContext, c ContentSpec) []byte {
         config := org.New()
         config.Log = jww.WARN
         writer := org.NewHTMLWriter()
-        /*
         writer.HighlightCodeBlock = func(source, lang string) string {
                 highlightedSource, err := c.Highlight(source, lang, "")
                 if err != nil {
@@ -7697,15 +7699,15 @@ func orgRender(ctx *RenderingContext, c ContentSpec) []byte <span class="cov0" t
                 }
                 return highlightedSource
         }
-        */
 
         html, err := config.Parse(bytes.NewReader(ctx.Content), ctx.DocumentName).Write(writer)
-        if err != nil </span><span class="cov0" title="0">{
+        if err != nil {
                 jww.ERROR.Printf("Could not render org: %s. Using unrendered content.", err)
                 return ctx.Content
-        }</span>
-        <span class="cov0" title="0">return []byte(html)</span>
+        }
+        return []byte(html)
 }
+*/
 
 func externallyRenderContent(ctx *RenderingContext, path string, args []string) []byte <span class="cov0" title="0">{
         content := ctx.Content
@@ -29008,13 +29010,13 @@ import (
         "strings"
 
         "github.com/gohugoio/hugo/common/herrors"
-        "github.com/niklasfasching/go-org/org"
+        // "github.com/niklasfasching/go-org/org"
 
         "github.com/BurntSushi/toml"
         "github.com/pkg/errors"
         "github.com/spf13/afero"
         "github.com/spf13/cast"
-        jww "github.com/spf13/jwalterweatherman"
+        // jww "github.com/spf13/jwalterweatherman"
         yaml "gopkg.in/yaml.v2"
 )
 
@@ -29119,8 +29121,10 @@ func (d Decoder) unmarshal(data []byte, f Format, v interface{}) error <span cla
         var err error
 
         switch f </span>{
-        case ORG:<span class="cov0" title="0">
-                err = d.unmarshalORG(data, v)</span>
+                /*
+        case ORG:
+                err = d.unmarshalORG(data, v)
+                */
         case JSON:<span class="cov8" title="1">
                 err = json.Unmarshal(data, v)</span>
         case TOML:<span class="cov8" title="1">
@@ -29190,33 +29194,35 @@ func (d Decoder) unmarshalCSV(data []byte, v interface{}) error <span class="cov
 
 }
 
-func (d Decoder) unmarshalORG(data []byte, v interface{}) error <span class="cov0" title="0">{
+/*
+func (d Decoder) unmarshalORG(data []byte, v interface{}) error {
         config := org.New()
         config.Log = jww.WARN
         document := config.Parse(bytes.NewReader(data), "")
-        if document.Error != nil </span><span class="cov0" title="0">{
+        if document.Error != nil {
                 return document.Error
-        }</span>
-        <span class="cov0" title="0">frontMatter := make(map[string]interface{}, len(document.BufferSettings))
-        for k, v := range document.BufferSettings </span><span class="cov0" title="0">{
+        }
+        frontMatter := make(map[string]interface{}, len(document.BufferSettings))
+        for k, v := range document.BufferSettings {
                 k = strings.ToLower(k)
-                if strings.HasSuffix(k, "[]") </span><span class="cov0" title="0">{
+                if strings.HasSuffix(k, "[]") {
                         frontMatter[k[:len(k)-2]] = strings.Fields(v)
-                }</span> else<span class="cov0" title="0"> if k == "tags" || k == "categories" || k == "aliases" </span><span class="cov0" title="0">{
+                } else if k == "tags" || k == "categories" || k == "aliases" {
                         jww.WARN.Printf("Please use '#+%s[]:' notation, automatic conversion is deprecated.", k)
                         frontMatter[k] = strings.Fields(v)
-                }</span> else<span class="cov0" title="0"> {
+                } else {
                         frontMatter[k] = v
-                }</span>
+                }
         }
-        <span class="cov0" title="0">switch v.(type) </span>{
-        case *map[string]interface{}:<span class="cov0" title="0">
-                *v.(*map[string]interface{}) = frontMatter</span>
-        default:<span class="cov0" title="0">
-                *v.(*interface{}) = frontMatter</span>
+        switch v.(type) {
+        case *map[string]interface{}:
+                *v.(*map[string]interface{}) = frontMatter
+        default:
+                *v.(*interface{}) = frontMatter
         }
-        <span class="cov0" title="0">return nil</span>
+        return nil
 }
+*/
 
 func toFileError(f Format, err error) error <span class="cov0" title="0">{
         return herrors.ToFileError(string(f), err)

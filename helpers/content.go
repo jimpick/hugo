@@ -27,7 +27,7 @@ import (
 	"unicode/utf8"
 
 	"github.com/gohugoio/hugo/common/maps"
-	"github.com/niklasfasching/go-org/org"
+	// "github.com/niklasfasching/go-org/org"
 
 	bp "github.com/gohugoio/hugo/bufferpool"
 	"github.com/gohugoio/hugo/config"
@@ -490,8 +490,10 @@ func (c ContentSpec) RenderBytes(ctx *RenderingContext) []byte {
 		return c.mmarkRender(ctx)
 	case "rst":
 		return getRstContent(ctx)
+		/*
 	case "org":
 		return orgRender(ctx, c)
+		*/
 	case "pandoc":
 		return getPandocContent(ctx)
 	}
@@ -751,11 +753,11 @@ func getPandocContent(ctx *RenderingContext) []byte {
 	return externallyRenderContent(ctx, path, args)
 }
 
+/*
 func orgRender(ctx *RenderingContext, c ContentSpec) []byte {
 	config := org.New()
 	config.Log = jww.WARN
 	writer := org.NewHTMLWriter()
-	/*
 	writer.HighlightCodeBlock = func(source, lang string) string {
 		highlightedSource, err := c.Highlight(source, lang, "")
 		if err != nil {
@@ -764,7 +766,6 @@ func orgRender(ctx *RenderingContext, c ContentSpec) []byte {
 		}
 		return highlightedSource
 	}
-	*/
 
 	html, err := config.Parse(bytes.NewReader(ctx.Content), ctx.DocumentName).Write(writer)
 	if err != nil {
@@ -773,6 +774,7 @@ func orgRender(ctx *RenderingContext, c ContentSpec) []byte {
 	}
 	return []byte(html)
 }
+*/
 
 func externallyRenderContent(ctx *RenderingContext, path string, args []string) []byte {
 	content := ctx.Content
