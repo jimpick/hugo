@@ -31,7 +31,6 @@ import (
 	"github.com/gohugoio/hugo/resources/resource_transformers/minifier"
 	"github.com/gohugoio/hugo/resources/resource_transformers/postcss"
 	"github.com/gohugoio/hugo/resources/resource_transformers/templates"
-	"github.com/gohugoio/hugo/resources/resource_transformers/tocss/scss"
 	"github.com/spf13/cast"
 )
 
@@ -41,13 +40,15 @@ func New(deps *deps.Deps) (*Namespace, error) {
 		return &Namespace{}, nil
 	}
 
+	/*
 	scssClient, err := scss.New(deps.BaseFs.Assets, deps.ResourceSpec)
 	if err != nil {
 		return nil, err
 	}
+	*/
 	return &Namespace{
 		deps:            deps,
-		scssClient:      scssClient,
+		// scssClient:      scssClient,
 		createClient:    create.New(deps.ResourceSpec),
 		bundlerClient:   bundler.New(deps.ResourceSpec),
 		integrityClient: integrity.New(deps.ResourceSpec),
@@ -63,7 +64,7 @@ type Namespace struct {
 
 	createClient    *create.Client
 	bundlerClient   *bundler.Client
-	scssClient      *scss.Client
+	// scssClient      *scss.Client
 	integrityClient *integrity.Client
 	minifyClient    *minifier.Client
 	postcssClient   *postcss.Client
@@ -221,6 +222,7 @@ func (ns *Namespace) Minify(r resources.ResourceTransformer) (resource.Resource,
 
 // ToCSS converts the given Resource to CSS. You can optional provide an Options
 // object or a target path (string) as first argument.
+/*
 func (ns *Namespace) ToCSS(args ...interface{}) (resource.Resource, error) {
 	var (
 		r          resources.ResourceTransformer
@@ -251,6 +253,7 @@ func (ns *Namespace) ToCSS(args ...interface{}) (resource.Resource, error) {
 
 	return ns.scssClient.ToCSS(r, options)
 }
+*/
 
 // PostCSS processes the given Resource with PostCSS
 func (ns *Namespace) PostCSS(args ...interface{}) (resource.Resource, error) {

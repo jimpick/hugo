@@ -50,10 +50,12 @@ func init() {
 			[][2]string{},
 		)
 
+		/*
 		ns.AddMethodMapping(ctx.ToCSS,
 			[]string{"toCSS"},
 			[][2]string{},
 		)
+		*/
 
 		ns.AddMethodMapping(ctx.PostCSS,
 			[]string{"postCSS"},
