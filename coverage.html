@@ -284,7 +284,7 @@
 				
 				<option value="file114">github.com/gohugoio/hugo/output/docshelper.go (9.5%)</option>
 				
-				<option value="file115">github.com/gohugoio/hugo/output/layout.go (88.4%)</option>
+				<option value="file115">github.com/gohugoio/hugo/output/layout.go (86.3%)</option>
 				
 				<option value="file116">github.com/gohugoio/hugo/output/layout_base.go (88.2%)</option>
 				
@@ -512,7 +512,7 @@
 				
 				<option value="file228">github.com/gohugoio/hugo/tpl/tplimpl/shortcodes.go (44.7%)</option>
 				
-				<option value="file229">github.com/gohugoio/hugo/tpl/tplimpl/template.go (62.5%)</option>
+				<option value="file229">github.com/gohugoio/hugo/tpl/tplimpl/template.go (61.8%)</option>
 				
 				<option value="file230">github.com/gohugoio/hugo/tpl/tplimpl/templateFuncster.go (100.0%)</option>
 				
@@ -28216,7 +28216,7 @@ func (l *LayoutHandler) For(d LayoutDescriptor, f Format) ([]string, error) <spa
         // We will get lots of requests for the same layouts, so avoid recalculations.
         key := layoutCacheKey{d, f.Name}
         l.mu.RLock()
-        if cacheVal, found := l.cache[key]; found </span><span class="cov8" title="1">{
+        if cacheVal, found := l.cache[key]; found </span><span class="cov0" title="0">{
                 l.mu.RUnlock()
                 return cacheVal, nil
         }</span>
@@ -47675,7 +47675,7 @@ import (
         "github.com/gohugoio/hugo/tpl/tplimpl/embedded"
         "github.com/pkg/errors"
 
-        "github.com/eknkc/amber"
+        // "github.com/eknkc/amber"
 
         "os"
 
@@ -47708,7 +47708,7 @@ var (
 )
 
 // Protecting  global map access (Amber)
-var amberMu sync.Mutex
+// var amberMu sync.Mutex
 
 type templateErr struct {
         name string
@@ -47751,7 +47751,7 @@ type templateHandler struct {
 
         extTextTemplates []*textTemplate
 
-        amberFuncMap template.FuncMap
+        // amberFuncMap template.FuncMap
 
         errors []*templateErr
 
@@ -48439,21 +48439,23 @@ func (t *templateHandler) initFuncs() <span class="cov8" title="1">{
         }</span>
 
         // Amber is HTML only.
-        <span class="cov8" title="1">t.amberFuncMap = template.FuncMap{}
+        /*
+        t.amberFuncMap = template.FuncMap{}
 
         amberMu.Lock()
-        for k, v := range amber.FuncMap </span><span class="cov8" title="1">{
+        for k, v := range amber.FuncMap {
                 t.amberFuncMap[k] = v
-        }</span>
+        }
 
-        <span class="cov8" title="1">for k, v := range t.html.funcster.funcMap </span><span class="cov8" title="1">{
+        for k, v := range t.html.funcster.funcMap {
                 t.amberFuncMap[k] = v
                 // Hacky, but we need to make sure that the func names are in the global map.
-                amber.FuncMap[k] = func() string </span><span class="cov0" title="0">{
-                        panic("should never be invoked")</span>
+                amber.FuncMap[k] = func() string {
+                        panic("should never be invoked")
                 }
         }
-        <span class="cov8" title="1">amberMu.Unlock()</span>
+        amberMu.Unlock()
+        */
 
 }
 

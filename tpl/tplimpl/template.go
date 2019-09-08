@@ -24,7 +24,7 @@ import (
 	"github.com/gohugoio/hugo/tpl/tplimpl/embedded"
 	"github.com/pkg/errors"
 
-	"github.com/eknkc/amber"
+	// "github.com/eknkc/amber"
 
 	"os"
 
@@ -57,7 +57,7 @@ var (
 )
 
 // Protecting  global map access (Amber)
-var amberMu sync.Mutex
+// var amberMu sync.Mutex
 
 type templateErr struct {
 	name string
@@ -100,7 +100,7 @@ type templateHandler struct {
 
 	extTextTemplates []*textTemplate
 
-	amberFuncMap template.FuncMap
+	// amberFuncMap template.FuncMap
 
 	errors []*templateErr
 
@@ -788,6 +788,7 @@ func (t *templateHandler) initFuncs() {
 	}
 
 	// Amber is HTML only.
+	/*
 	t.amberFuncMap = template.FuncMap{}
 
 	amberMu.Lock()
@@ -803,6 +804,7 @@ func (t *templateHandler) initFuncs() {
 		}
 	}
 	amberMu.Unlock()
+	*/
 
 }
 
