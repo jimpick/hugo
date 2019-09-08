@@ -23,7 +23,7 @@ import (
 	"github.com/gohugoio/hugo/source"
 
 	"github.com/gohugoio/hugo/parser/pageparser"
-	"github.com/pkg/errors"
+	// "github.com/pkg/errors"
 
 	"github.com/gohugoio/hugo/output"
 
@@ -198,11 +198,13 @@ func newPageWithContent(f *fileInfo, s *Site, bundled bool, content resource.Ope
 		return nil, err
 	}
 
+	/*
 	gi, err := s.h.gitInfoForPage(ps)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to load Git data")
 	}
 	ps.gitInfo = gi
+	*/
 
 	r, err := content()
 	if err != nil {

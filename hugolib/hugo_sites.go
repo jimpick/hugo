@@ -31,7 +31,7 @@ import (
 
 	"github.com/gohugoio/hugo/source"
 
-	"github.com/bep/gitmap"
+	// "github.com/bep/gitmap"
 	"github.com/gohugoio/hugo/config"
 
 	"github.com/gohugoio/hugo/publisher"
@@ -69,7 +69,7 @@ type HugoSites struct {
 
 	*deps.Deps
 
-	gitInfo *gitInfo
+	// gitInfo *gitInfo
 
 	// As loaded from the /data dirs
 	data map[string]interface{}
@@ -120,7 +120,7 @@ type hugoSitesInit struct {
 	data *lazy.Init
 
 	// Loads the Git info for all the pages if enabled.
-	gitInfo *lazy.Init
+	//gitInfo *lazy.Init
 
 	// Maps page translations.
 	translations *lazy.Init
@@ -128,7 +128,7 @@ type hugoSitesInit struct {
 
 func (h *hugoSitesInit) Reset() {
 	h.data.Reset()
-	h.gitInfo.Reset()
+	// h.gitInfo.Reset()
 	h.translations.Reset()
 }
 
@@ -140,6 +140,7 @@ func (h *HugoSites) Data() map[string]interface{} {
 	return h.data
 }
 
+/*
 func (h *HugoSites) gitInfoForPage(p page.Page) (*gitmap.GitInfo, error) {
 	if _, err := h.init.gitInfo.Do(); err != nil {
 		return nil, err
@@ -151,6 +152,7 @@ func (h *HugoSites) gitInfoForPage(p page.Page) (*gitmap.GitInfo, error) {
 
 	return h.gitInfo.forPage(p), nil
 }
+*/
 
 func (h *HugoSites) siteInfos() page.Sites {
 	infos := make(page.Sites, len(h.Sites))
@@ -269,7 +271,7 @@ func newHugoSites(cfg deps.DepsCfg, sites ...*Site) (*HugoSites, error) {
 		Sites:        sites,
 		init: &hugoSitesInit{
 			data:         lazy.New(),
-			gitInfo:      lazy.New(),
+			// gitInfo:      lazy.New(),
 			translations: lazy.New(),
 		},
 	}
@@ -296,6 +298,7 @@ func newHugoSites(cfg deps.DepsCfg, sites ...*Site) (*HugoSites, error) {
 		return nil, nil
 	})
 
+	/*
 	h.init.gitInfo.Add(func() (interface{}, error) {
 		err := h.loadGitInfo()
 		if err != nil {
@@ -303,6 +306,7 @@ func newHugoSites(cfg deps.DepsCfg, sites ...*Site) (*HugoSites, error) {
 		}
 		return nil, nil
 	})
+	*/
 
 	for _, s := range sites {
 		s.h = h
@@ -329,6 +333,7 @@ func newHugoSites(cfg deps.DepsCfg, sites ...*Site) (*HugoSites, error) {
 	return h, nil
 }
 
+/*
 func (h *HugoSites) loadGitInfo() error {
 	if h.Cfg.GetBool("enableGitInfo") {
 		gi, err := newGitInfo(h.Cfg)
@@ -340,6 +345,7 @@ func (h *HugoSites) loadGitInfo() error {
 	}
 	return nil
 }
+*/
 
 func applyDeps(cfg deps.DepsCfg, sites ...*Site) error {
 	if cfg.TemplateProvider == nil {
