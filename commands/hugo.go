@@ -54,7 +54,7 @@ import (
 	"github.com/gohugoio/hugo/helpers"
 	"github.com/gohugoio/hugo/hugolib"
 	// "github.com/gohugoio/hugo/livereload"
-	"github.com/gohugoio/hugo/watcher"
+	// "github.com/gohugoio/hugo/watcher"
 	"github.com/spf13/afero"
 	"github.com/spf13/cobra"
 	"github.com/spf13/fsync"
@@ -808,6 +808,7 @@ func (c *commandeer) fullRebuild(changeType string) {
 }
 
 // newWatcher creates a new watcher to watch filesystem events.
+/*
 func (c *commandeer) newWatcher(dirList ...string) (*watcher.Batcher, error) {
 	if runtime.GOOS == "darwin" {
 		tweakLimit()
@@ -858,6 +859,7 @@ func (c *commandeer) newWatcher(dirList ...string) (*watcher.Batcher, error) {
 
 	return watcher, nil
 }
+*/
 
 func (c *commandeer) printChangeDetected(typ string) {
 	msg := "\nChange"
@@ -876,6 +878,7 @@ const (
 	configChangeGoMod  = "go.mod file"
 )
 
+/*
 func (c *commandeer) handleEvents(watcher *watcher.Batcher,
 	staticSyncer *staticSyncer,
 	evs []fsnotify.Event,
@@ -1071,7 +1074,6 @@ func (c *commandeer) handleEvents(watcher *watcher.Batcher,
 			}
 		}
 
-		/*
 		if !c.h.buildWatch && !c.Cfg.GetBool("disableLiveReload") {
 			// Will block forever trying to write to a channel that nobody is reading if livereload isn't initialized
 
@@ -1085,10 +1087,8 @@ func (c *commandeer) handleEvents(watcher *watcher.Batcher,
 				livereload.ForceRefresh()
 			}
 		}
-		*/
 	}
 
-	/*
 	if len(dynamicEvents) > 0 {
 		partitionedEvents := partitionDynamicEvents(
 			c.firstPathSpec().BaseFs.SourceFilesystems,
@@ -1138,8 +1138,8 @@ func (c *commandeer) handleEvents(watcher *watcher.Batcher,
 			}
 		}
 	}
-	*/
 }
+*/
 
 // dynamicEvents contains events that is considered dynamic, as in "not static".
 // Both of these categories will trigger a new build, but the asset events
