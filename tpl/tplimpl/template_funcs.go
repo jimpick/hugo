@@ -31,7 +31,7 @@ import (
 	_ "github.com/gohugoio/hugo/tpl/encoding"
 	_ "github.com/gohugoio/hugo/tpl/fmt"
 	_ "github.com/gohugoio/hugo/tpl/hugo"
-	_ "github.com/gohugoio/hugo/tpl/images"
+	// _ "github.com/gohugoio/hugo/tpl/images"
 	_ "github.com/gohugoio/hugo/tpl/inflect"
 	_ "github.com/gohugoio/hugo/tpl/lang"
 	_ "github.com/gohugoio/hugo/tpl/math"

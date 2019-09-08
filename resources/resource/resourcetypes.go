@@ -16,7 +16,7 @@ package resource
 import (
 	"github.com/gohugoio/hugo/langs"
 	"github.com/gohugoio/hugo/media"
-	"github.com/gohugoio/hugo/resources/images/exif"
+	// "github.com/gohugoio/hugo/resources/images/exif"
 
 	"github.com/gohugoio/hugo/common/hugio"
 )
@@ -49,7 +49,7 @@ type ImageOps interface {
 	Fit(spec string) (Image, error)
 	Resize(spec string) (Image, error)
 	Filter(filters ...interface{}) (Image, error)
-	Exif() (*exif.Exif, error)
+	// Exif() (*exif.Exif, error)
 }
 
 type ResourceTypesProvider interface {

@@ -21,7 +21,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/gohugoio/hugo/resources/images/exif"
+	// "github.com/gohugoio/hugo/resources/images/exif"
 	"github.com/spf13/afero"
 
 	bp "github.com/gohugoio/hugo/bufferpool"
@@ -181,9 +181,11 @@ func (r *resourceAdapter) Height() int {
 	return r.getImageOps().Height()
 }
 
+/*
 func (r *resourceAdapter) Exif() (*exif.Exif, error) {
 	return r.getImageOps().Exif()
 }
+*/
 
 func (r *resourceAdapter) Key() string {
 	r.init(false, false)
