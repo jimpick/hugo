@@ -140,7 +140,7 @@
 				
 				<option value="file42">github.com/gohugoio/hugo/helpers/content_renderer.go (39.1%)</option>
 				
-				<option value="file43">github.com/gohugoio/hugo/helpers/general.go (27.6%)</option>
+				<option value="file43">github.com/gohugoio/hugo/helpers/general.go (27.2%)</option>
 				
 				<option value="file44">github.com/gohugoio/hugo/helpers/path.go (24.8%)</option>
 				
@@ -282,7 +282,7 @@
 				
 				<option value="file113">github.com/gohugoio/hugo/output/docshelper.go (9.5%)</option>
 				
-				<option value="file114">github.com/gohugoio/hugo/output/layout.go (88.4%)</option>
+				<option value="file114">github.com/gohugoio/hugo/output/layout.go (86.3%)</option>
 				
 				<option value="file115">github.com/gohugoio/hugo/output/layout_base.go (88.2%)</option>
 				
@@ -342,7 +342,7 @@
 				
 				<option value="file143">github.com/gohugoio/hugo/resources/page/pages_related.go (56.5%)</option>
 				
-				<option value="file144">github.com/gohugoio/hugo/resources/page/pages_sort.go (10.9%)</option>
+				<option value="file144">github.com/gohugoio/hugo/resources/page/pages_sort.go (10.0%)</option>
 				
 				<option value="file145">github.com/gohugoio/hugo/resources/page/pagination.go (29.9%)</option>
 				
@@ -7883,7 +7883,7 @@ import (
 
         "github.com/spf13/afero"
 
-        "github.com/jdkato/prose/transform"
+        // "github.com/jdkato/prose/transform"
 
         bp "github.com/gohugoio/hugo/bufferpool"
         jww "github.com/spf13/jwalterweatherman"
@@ -8075,17 +8075,20 @@ func ReaderContains(r io.Reader, subslice []byte) bool <span class="cov0" title=
 //
 // If an unknown or empty style is provided, AP style is what you get.
 func GetTitleFunc(style string) func(s string) string <span class="cov8" title="1">{
-        switch strings.ToLower(style) </span>{
-        case "go":<span class="cov0" title="0">
-                return strings.Title</span>
-        case "chicago":<span class="cov0" title="0">
+        return strings.Title
+        /*
+        switch strings.ToLower(style) {
+        case "go":
+                return strings.Title
+        case "chicago":
                 tc := transform.NewTitleConverter(transform.ChicagoStyle)
-                return tc.Title</span>
-        default:<span class="cov8" title="1">
+                return tc.Title
+        default:
                 tc := transform.NewTitleConverter(transform.APStyle)
-                return tc.Title</span>
+                return tc.Title
         }
-}
+        */
+}</span>
 
 // HasStringsPrefix tests whether the string slice s begins with prefix slice s.
 func HasStringsPrefix(s, prefix []string) bool <span class="cov0" title="0">{
@@ -28092,7 +28095,7 @@ func (l *LayoutHandler) For(d LayoutDescriptor, f Format) ([]string, error) <spa
         // We will get lots of requests for the same layouts, so avoid recalculations.
         key := layoutCacheKey{d, f.Name}
         l.mu.RLock()
-        if cacheVal, found := l.cache[key]; found </span><span class="cov8" title="1">{
+        if cacheVal, found := l.cache[key]; found </span><span class="cov0" title="0">{
                 l.mu.RUnlock()
                 return cacheVal, nil
         }</span>
@@ -34665,7 +34668,7 @@ var languagePageSort = func(p1, p2 Page) bool <span class="cov0" title="0">{
 }
 
 func (ps *pageSorter) Len() int      <span class="cov8" title="1">{ return len(ps.pages) }</span>
-func (ps *pageSorter) Swap(i, j int) <span class="cov8" title="1">{ ps.pages[i], ps.pages[j] = ps.pages[j], ps.pages[i] }</span>
+func (ps *pageSorter) Swap(i, j int) <span class="cov0" title="0">{ ps.pages[i], ps.pages[j] = ps.pages[j], ps.pages[i] }</span>
 
 // Less is part of sort.Interface. It is implemented by calling the "by" closure in the sorter.
 func (ps *pageSorter) Less(i, j int) bool <span class="cov8" title="1">{ return ps.by(ps.pages[i], ps.pages[j]) }</span>

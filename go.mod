@@ -12,7 +12,6 @@ require (
 	github.com/armon/go-radix v1.0.0
 	github.com/bep/debounce v1.2.0
 	github.com/gobwas/glob v0.2.3
-	github.com/jdkato/prose v1.1.1
 	github.com/markbates/inflect v0.0.0-00010101000000-000000000000
 	github.com/mattn/go-isatty v0.0.9
 	github.com/mattn/go-runewidth v0.0.4 // indirect

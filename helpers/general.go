@@ -34,7 +34,7 @@ import (
 
 	"github.com/spf13/afero"
 
-	"github.com/jdkato/prose/transform"
+	// "github.com/jdkato/prose/transform"
 
 	bp "github.com/gohugoio/hugo/bufferpool"
 	jww "github.com/spf13/jwalterweatherman"
@@ -226,6 +226,8 @@ func ReaderContains(r io.Reader, subslice []byte) bool {
 //
 // If an unknown or empty style is provided, AP style is what you get.
 func GetTitleFunc(style string) func(s string) string {
+	return strings.Title
+	/*
 	switch strings.ToLower(style) {
 	case "go":
 		return strings.Title
@@ -236,6 +238,7 @@ func GetTitleFunc(style string) func(s string) string {
 		tc := transform.NewTitleConverter(transform.APStyle)
 		return tc.Title
 	}
+	*/
 }
 
 // HasStringsPrefix tests whether the string slice s begins with prefix slice s.
