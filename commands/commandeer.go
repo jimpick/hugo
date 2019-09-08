@@ -122,7 +122,8 @@ func (c *commandeer) getErrorWithContext() interface{} {
 
 	m := make(map[string]interface{})
 
-	m["Error"] = errors.New(removeErrorPrefixFromLog(c.logger.Errors()))
+	// m["Error"] = errors.New(removeErrorPrefixFromLog(c.logger.Errors()))
+	m["Error"] = errors.New(c.logger.Errors())
 	m["Version"] = hugo.BuildVersionString()
 
 	fe := herrors.UnwrapErrorWithFileContext(c.buildErr)

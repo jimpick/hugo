@@ -19,7 +19,7 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
-	"os/signal"
+	// "os/signal"
 	"runtime/pprof"
 	"runtime/trace"
 	"sync/atomic"
@@ -34,7 +34,7 @@ import (
 	"github.com/gohugoio/hugo/common/loggers"
 	"github.com/gohugoio/hugo/common/terminal"
 
-	"syscall"
+	// "syscall"
 
 	"github.com/gohugoio/hugo/hugolib/filesystems"
 
@@ -494,6 +494,7 @@ func (c *commandeer) build() error {
 		}
 	}
 
+	/*
 	if c.h.buildWatch {
 		watchDirs, err := c.getDirList()
 		if err != nil {
@@ -514,6 +515,7 @@ func (c *commandeer) build() error {
 
 		<-sigs
 	}
+	*/
 
 	return nil
 }

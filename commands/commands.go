@@ -41,21 +41,23 @@ func (b *commandsBuilder) addCommands(commands ...cmder) *commandsBuilder {
 }
 
 func (b *commandsBuilder) addAll() *commandsBuilder {
-	b.addCommands(
-		b.newServerCmd(),
-		newVersionCmd(),
-		newEnvCmd(),
-		newConfigCmd(),
-		newCheckCmd(),
-		newDeployCmd(),
-		newConvertCmd(),
-		b.newNewCmd(),
-		newListCmd(),
-		newImportCmd(),
-		newGenCmd(),
-		createReleaser(),
-		b.newModCmd(),
-	)
+	/*
+		b.addCommands(
+			b.newServerCmd(),
+			newVersionCmd(),
+			newEnvCmd(),
+			newConfigCmd(),
+			newCheckCmd(),
+			newDeployCmd(),
+			newConvertCmd(),
+			b.newNewCmd(),
+			newListCmd(),
+			newImportCmd(),
+			newGenCmd(),
+			createReleaser(),
+			b.newModCmd(),
+		)
+	*/
 
 	return b
 }
