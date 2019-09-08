@@ -20,7 +20,7 @@ import (
 	"log"
 	"mime"
 	"net/url"
-	"os"
+	// "os"
 	"path"
 	"path/filepath"
 	"sort"
@@ -28,7 +28,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gohugoio/hugo/hugofs/files"
+	// "github.com/gohugoio/hugo/hugofs/files"
 
 	"github.com/gohugoio/hugo/common/maps"
 
@@ -49,19 +49,19 @@ import (
 
 	"github.com/gohugoio/hugo/media"
 
-	"github.com/fsnotify/fsnotify"
+	// "github.com/fsnotify/fsnotify"
 	bp "github.com/gohugoio/hugo/bufferpool"
 	"github.com/gohugoio/hugo/deps"
 	"github.com/gohugoio/hugo/helpers"
 	"github.com/gohugoio/hugo/navigation"
 	"github.com/gohugoio/hugo/output"
 	"github.com/gohugoio/hugo/related"
-	"github.com/gohugoio/hugo/resources"
+	// "github.com/gohugoio/hugo/resources"
 	"github.com/gohugoio/hugo/resources/page/pagemeta"
 	"github.com/gohugoio/hugo/source"
 	"github.com/gohugoio/hugo/tpl"
 
-	"github.com/spf13/afero"
+	// "github.com/spf13/afero"
 	"github.com/spf13/cast"
 	"github.com/spf13/viper"
 )
@@ -820,6 +820,7 @@ func (s *Site) RegisterMediaTypes() {
 	}
 }
 
+/*
 func (s *Site) filterFileEvents(events []fsnotify.Event) []fsnotify.Event {
 	var filtered []fsnotify.Event
 	seen := make(map[fsnotify.Event]bool)
@@ -1056,6 +1057,7 @@ func (s *Site) processPartial(config *BuildCfg, init func(config *BuildCfg) erro
 	return nil
 
 }
+*/
 
 func (s *Site) process(config BuildCfg) (err error) {
 	if err = s.initialize(); err != nil {
@@ -1223,6 +1225,7 @@ func (s *Site) initializeSiteInfo() error {
 	return nil
 }
 
+/*
 func (s *Site) isI18nEvent(e fsnotify.Event) bool {
 	return s.BaseFs.SourceFilesystems.IsI18n(e.Name)
 }
@@ -1238,6 +1241,7 @@ func (s *Site) isLayoutDirEvent(e fsnotify.Event) bool {
 func (s *Site) isContentDirEvent(e fsnotify.Event) bool {
 	return s.BaseFs.IsContent(e.Name)
 }
+*/
 
 func (s *Site) readAndProcessContent(filenames ...string) error {
 	sourceSpec := source.NewSourceSpec(s.PathSpec, s.BaseFs.Content.Fs)

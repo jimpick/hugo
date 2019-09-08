@@ -26,13 +26,13 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/fsnotify/fsnotify"
+	// "github.com/fsnotify/fsnotify"
 	"github.com/gohugoio/hugo/helpers"
 )
 
 // Build builds all sites. If filesystem events are provided,
 // this is considered to be a potential partial rebuild.
-func (h *HugoSites) Build(config BuildCfg, events ...fsnotify.Event) error {
+func (h *HugoSites) Build(config BuildCfg /*, events ...fsnotify.Event*/ ) error {
 
 	if h.running {
 		// Make sure we don't trigger rebuilds in parallel.
@@ -85,16 +85,18 @@ func (h *HugoSites) Build(config BuildCfg, events ...fsnotify.Event) error {
 					s.Deps.BuildStartListeners.Notify()
 				}
 
+				/*
 				if len(events) > 0 {
 					// Rebuild
 					if err := h.initRebuild(conf); err != nil {
 						return errors.Wrap(err, "initRebuild")
 					}
 				} else {
+					*/
 					if err := h.initSites(conf); err != nil {
 						return errors.Wrap(err, "initSites")
 					}
-				}
+				// }
 
 				return nil
 			}
@@ -102,7 +104,7 @@ func (h *HugoSites) Build(config BuildCfg, events ...fsnotify.Event) error {
 			var err error
 
 			f := func() {
-				err = h.process(conf, init, events...)
+				err = h.process(conf, init /*, events...*/)
 			}
 			trace.WithRegion(ctx, "process", f)
 			if err != nil {
@@ -216,7 +218,7 @@ func (h *HugoSites) initRebuild(config *BuildCfg) error {
 	return nil
 }
 
-func (h *HugoSites) process(config *BuildCfg, init func(config *BuildCfg) error, events ...fsnotify.Event) error {
+func (h *HugoSites) process(config *BuildCfg, init func(config *BuildCfg) error /*, events ...fsnotify.Event*/) error {
 	// We should probably refactor the Site and pull up most of the logic from there to here,
 	// but that seems like a daunting task.
 	// So for now, if there are more than one site (language),
@@ -224,10 +226,12 @@ func (h *HugoSites) process(config *BuildCfg, init func(config *BuildCfg) error,
 
 	firstSite := h.Sites[0]
 
+	/*
 	if len(events) > 0 {
 		// This is a rebuild
 		return firstSite.processPartial(config, init, events)
 	}
+	*/
 
 	return firstSite.process(*config)
 

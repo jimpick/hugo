@@ -50,7 +50,7 @@ import (
 
 	flag "github.com/spf13/pflag"
 
-	"github.com/fsnotify/fsnotify"
+	// "github.com/fsnotify/fsnotify"
 	"github.com/gohugoio/hugo/helpers"
 	"github.com/gohugoio/hugo/hugolib"
 	// "github.com/gohugoio/hugo/livereload"
@@ -721,6 +721,7 @@ func (c *commandeer) handleBuildErr(err error, msg string) {
 	}
 }
 
+/*
 func (c *commandeer) rebuildSites(events []fsnotify.Event) error {
 	defer c.timeTrack(time.Now(), "Total")
 
@@ -741,6 +742,7 @@ func (c *commandeer) rebuildSites(events []fsnotify.Event) error {
 	}
 	return c.hugo().Build(hugolib.BuildCfg{RecentlyVisited: visited}, events...)
 }
+*/
 
 func (c *commandeer) partialReRender(urls ...string) error {
 	c.buildErr = nil
@@ -1144,6 +1146,7 @@ func (c *commandeer) handleEvents(watcher *watcher.Batcher,
 // dynamicEvents contains events that is considered dynamic, as in "not static".
 // Both of these categories will trigger a new build, but the asset events
 // does not fit into the "navigate to changed" logic.
+/*
 type dynamicEvents struct {
 	ContentEvents []fsnotify.Event
 	AssetEvents   []fsnotify.Event
@@ -1175,3 +1178,4 @@ func pickOneWriteOrCreatePath(events []fsnotify.Event) string {
 
 	return name
 }
+*/

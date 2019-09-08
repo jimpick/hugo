@@ -11,7 +11,6 @@ require (
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/armon/go-radix v1.0.0
 	github.com/bep/debounce v1.2.0
-	github.com/fsnotify/fsnotify v1.4.7
 	github.com/gobwas/glob v0.2.3
 	github.com/jdkato/prose v1.1.1
 	github.com/markbates/inflect v0.0.0-00010101000000-000000000000
