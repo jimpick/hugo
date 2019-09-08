@@ -18,11 +18,11 @@ package create
 import (
 	"path"
 	"path/filepath"
-	"strings"
+	// "strings"
 
-	"github.com/gohugoio/hugo/hugofs/glob"
+	// "github.com/gohugoio/hugo/hugofs/glob"
 
-	"github.com/gohugoio/hugo/hugofs"
+	// "github.com/gohugoio/hugo/hugofs"
 
 	"github.com/gohugoio/hugo/common/hugio"
 	"github.com/gohugoio/hugo/resources"
@@ -53,6 +53,7 @@ func (c *Client) Get(filename string) (resource.Resource, error) {
 }
 
 // Match gets the resources matching the given pattern from the assets filesystem.
+/*
 func (c *Client) Match(pattern string) (resource.Resources, error) {
 	return c.match(pattern, false)
 }
@@ -113,6 +114,7 @@ func (c *Client) match(pattern string, firstOnly bool) (resource.Resources, erro
 
 	})
 }
+*/
 
 // FromString creates a new Resource from a string with the given relative target path.
 func (c *Client) FromString(targetPath, content string) (resource.Resource, error) {

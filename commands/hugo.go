@@ -486,12 +486,14 @@ func (c *commandeer) build() error {
 		c.hugo().PrintProcessingStats(os.Stdout)
 		fmt.Println()
 
+		/*
 		if createCounter, ok := c.destinationFs.(hugofs.DuplicatesReporter); ok {
 			dupes := createCounter.ReportDuplicates()
 			if dupes != "" {
 				c.logger.WARN.Println("Duplicate target paths:", dupes)
 			}
 		}
+		*/
 	}
 
 	/*

@@ -362,6 +362,7 @@ func (c *commandeer) loadConfig(mustHaveConfigFile, running bool) error {
 			fs.Destination = new(afero.MemMapFs)
 		}
 
+		/*
 		if c.fastRenderMode {
 			// For now, fast render mode only. It should, however, be fast enough
 			// for the full variant, too.
@@ -376,10 +377,13 @@ func (c *commandeer) loadConfig(mustHaveConfigFile, running bool) error {
 			fs.Destination = hugofs.NewHashingFs(fs.Destination, changeDetector)
 			c.changeDetector = changeDetector
 		}
+		*/
 
+		/*
 		if c.Cfg.GetBool("logPathWarnings") {
 			fs.Destination = hugofs.NewCreateCountingFs(fs.Destination)
 		}
+		*/
 
 		// To debug hard-to-find path issues.
 		//fs.Destination = hugofs.NewStacktracerFs(fs.Destination, `fr/fr`)

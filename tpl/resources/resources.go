@@ -89,6 +89,7 @@ func (ns *Namespace) Get(filename interface{}) (resource.Resource, error) {
 // It looks for files in the assets file system.
 //
 // See Match for a more complete explanation about the rules used.
+/*
 func (ns *Namespace) GetMatch(pattern interface{}) (resource.Resource, error) {
 	patternStr, err := cast.ToStringE(pattern)
 	if err != nil {
@@ -123,6 +124,7 @@ func (ns *Namespace) Match(pattern interface{}) (resource.Resources, error) {
 
 	return ns.createClient.Match(patternStr)
 }
+*/
 
 // Concat concatenates a slice of Resource objects. These resources must
 // (currently) be of the same Media Type.

@@ -474,6 +474,7 @@ func createSitesFromConfig(cfg deps.DepsCfg) ([]*Site, error) {
 
 // Reset resets the sites and template caches etc., making it ready for a full rebuild.
 func (h *HugoSites) reset(config *BuildCfg) {
+	/*
 	if config.ResetState {
 		for i, s := range h.Sites {
 			h.Sites[i] = s.reset()
@@ -482,6 +483,7 @@ func (h *HugoSites) reset(config *BuildCfg) {
 			}
 		}
 	}
+	*/
 
 	h.fatalErrorHandler = &fatalErrorHandler{
 		h:     h,
