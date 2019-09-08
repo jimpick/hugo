@@ -14,12 +14,14 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/gohugoio/hugo/commands"
 )
 
 func main() {
+	fmt.Println("Jim args", os.Args[1:])
 	resp := commands.Execute(os.Args[1:])
 
 	if resp.Err != nil {
