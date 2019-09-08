@@ -60,8 +60,8 @@ type ContentSpec struct {
 	BuildExpired bool
 	BuildDrafts  bool
 
-	Highlight            func(code, lang, optsStr string) (string, error)
-	defatultPygmentsOpts map[string]string
+	// Highlight            func(code, lang, optsStr string) (string, error)
+	// defatultPygmentsOpts map[string]string
 
 	Cfg config.Provider
 }
@@ -83,6 +83,7 @@ func NewContentSpec(cfg config.Provider) (*ContentSpec, error) {
 	}
 
 	// Highlighting setup
+	/*
 	options, err := parseDefaultPygmentsOpts(cfg)
 	if err != nil {
 		return nil, err
@@ -106,6 +107,7 @@ func NewContentSpec(cfg config.Provider) (*ContentSpec, error) {
 	} else {
 		spec.Highlight = h.chromaHighlight
 	}
+	*/
 
 	return spec, nil
 }
@@ -753,6 +755,7 @@ func orgRender(ctx *RenderingContext, c ContentSpec) []byte {
 	config := org.New()
 	config.Log = jww.WARN
 	writer := org.NewHTMLWriter()
+	/*
 	writer.HighlightCodeBlock = func(source, lang string) string {
 		highlightedSource, err := c.Highlight(source, lang, "")
 		if err != nil {
@@ -761,6 +764,7 @@ func orgRender(ctx *RenderingContext, c ContentSpec) []byte {
 		}
 		return highlightedSource
 	}
+	*/
 
 	html, err := config.Parse(bytes.NewReader(ctx.Content), ctx.DocumentName).Write(writer)
 	if err != nil {

@@ -9,7 +9,6 @@ require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/PuerkitoBio/purell v1.1.1
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
-	github.com/alecthomas/chroma v0.6.6
 	github.com/armon/go-radix v1.0.0
 	github.com/bep/debounce v1.2.0
 	github.com/bep/gitmap v1.1.1

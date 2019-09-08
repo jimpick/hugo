@@ -15,7 +15,7 @@ package helpers
 
 import (
 	"bytes"
-	"strings"
+	// "strings"
 
 	"github.com/gohugoio/hugo/config"
 	"github.com/miekg/mmark"
@@ -33,14 +33,16 @@ type HugoHTMLRenderer struct {
 // BlockCode renders a given text as a block of code.
 // Pygments is used if it is setup to handle code fences.
 func (r *HugoHTMLRenderer) BlockCode(out *bytes.Buffer, text []byte, lang string) {
+	/*
 	if r.Cfg.GetBool("pygmentsCodeFences") && (lang != "" || r.Cfg.GetBool("pygmentsCodeFencesGuessSyntax")) {
 		opts := r.Cfg.GetString("pygmentsOptions")
 		str := strings.Trim(string(text), "\n\r")
 		highlighted, _ := r.cs.Highlight(str, lang, opts)
 		out.WriteString(highlighted)
 	} else {
+		*/
 		r.Renderer.BlockCode(out, text, lang)
-	}
+	//}
 }
 
 // ListItem adds task list support to the Blackfriday renderer.
@@ -98,11 +100,13 @@ type HugoMmarkHTMLRenderer struct {
 // BlockCode renders a given text as a block of code.
 // Pygments is used if it is setup to handle code fences.
 func (r *HugoMmarkHTMLRenderer) BlockCode(out *bytes.Buffer, text []byte, lang string, caption []byte, subfigure bool, callouts bool) {
+	/*
 	if r.Cfg.GetBool("pygmentsCodeFences") && (lang != "" || r.Cfg.GetBool("pygmentsCodeFencesGuessSyntax")) {
 		str := strings.Trim(string(text), "\n\r")
 		highlighted, _ := r.cs.Highlight(str, lang, "")
 		out.WriteString(highlighted)
 	} else {
+		*/
 		r.Renderer.BlockCode(out, text, lang, caption, subfigure, callouts)
-	}
+	// }
 }

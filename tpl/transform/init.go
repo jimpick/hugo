@@ -38,10 +38,12 @@ func init() {
 		)
 		*/
 
+		/*
 		ns.AddMethodMapping(ctx.Highlight,
 			[]string{"highlight"},
 			[][2]string{},
 		)
+		*/
 
 		ns.AddMethodMapping(ctx.HTMLEscape,
 			[]string{"htmlEscape"},

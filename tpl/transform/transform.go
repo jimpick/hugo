@@ -61,6 +61,7 @@ func (ns *Namespace) Emojify(s interface{}) (template.HTML, error) {
 
 // Highlight returns a copy of s as an HTML string with syntax
 // highlighting applied.
+/*
 func (ns *Namespace) Highlight(s interface{}, lang, opts string) (template.HTML, error) {
 	ss, err := cast.ToStringE(s)
 	if err != nil {
@@ -70,6 +71,7 @@ func (ns *Namespace) Highlight(s interface{}, lang, opts string) (template.HTML,
 	highlighted, _ := ns.deps.ContentSpec.Highlight(ss, lang, opts)
 	return template.HTML(highlighted), nil
 }
+*/
 
 // HTMLEscape returns a copy of s with reserved HTML characters escaped.
 func (ns *Namespace) HTMLEscape(s interface{}) (string, error) {
