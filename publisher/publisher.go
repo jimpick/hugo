@@ -29,7 +29,7 @@ import (
 
 	"github.com/gohugoio/hugo/output"
 	"github.com/gohugoio/hugo/transform"
-	"github.com/gohugoio/hugo/transform/livereloadinject"
+	// "github.com/gohugoio/hugo/transform/livereloadinject"
 	"github.com/gohugoio/hugo/transform/metainject"
 	"github.com/gohugoio/hugo/transform/urlreplacers"
 )
@@ -139,9 +139,11 @@ func (p DestinationPublisher) createTransformerChain(f Descriptor) transform.Cha
 	}
 
 	if isHTML {
+		/*
 		if f.LiveReloadPort > 0 {
 			transformers = append(transformers, livereloadinject.New(f.LiveReloadPort))
 		}
+		*/
 
 		// This is only injected on the home page.
 		if f.AddHugoGeneratorTag {
