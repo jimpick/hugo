@@ -348,7 +348,7 @@
 				
 				<option value="file146">github.com/gohugoio/hugo/resources/page/pages_related.go (56.5%)</option>
 				
-				<option value="file147">github.com/gohugoio/hugo/resources/page/pages_sort.go (10.0%)</option>
+				<option value="file147">github.com/gohugoio/hugo/resources/page/pages_sort.go (10.9%)</option>
 				
 				<option value="file148">github.com/gohugoio/hugo/resources/page/pagination.go (29.9%)</option>
 				
@@ -35245,7 +35245,7 @@ var languagePageSort = func(p1, p2 Page) bool <span class="cov0" title="0">{
 }
 
 func (ps *pageSorter) Len() int      <span class="cov8" title="1">{ return len(ps.pages) }</span>
-func (ps *pageSorter) Swap(i, j int) <span class="cov0" title="0">{ ps.pages[i], ps.pages[j] = ps.pages[j], ps.pages[i] }</span>
+func (ps *pageSorter) Swap(i, j int) <span class="cov8" title="1">{ ps.pages[i], ps.pages[j] = ps.pages[j], ps.pages[i] }</span>
 
 // Less is part of sort.Interface. It is implemented by calling the "by" closure in the sorter.
 func (ps *pageSorter) Less(i, j int) bool <span class="cov8" title="1">{ return ps.by(ps.pages[i], ps.pages[j]) }</span>
