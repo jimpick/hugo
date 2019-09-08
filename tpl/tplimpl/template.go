@@ -238,7 +238,7 @@ func (t *templateHandler) LookupVariant(name string, variants tpl.TemplateVarian
 	return &tpl.TemplateAdapter{
 		Template:             sv.templ,
 		Info:                 sv.info,
-		Metrics:              t.Deps.Metrics,
+		// Metrics:              t.Deps.Metrics,
 		Fs:                   t.layoutsFs,
 		NameBaseTemplateName: t.html.nameBaseTemplateName}, true, more
 
@@ -399,7 +399,8 @@ func (t *htmlTemplates) Lookup(name string) (tpl.Template, bool) {
 		return nil, false
 	}
 
-	return &tpl.TemplateAdapter{Template: templ, Metrics: t.funcster.Deps.Metrics, Fs: t.handler.layoutsFs, NameBaseTemplateName: t.nameBaseTemplateName}, true
+	// return &tpl.TemplateAdapter{Template: templ, Metrics: t.funcster.Deps.Metrics, Fs: t.handler.layoutsFs, NameBaseTemplateName: t.nameBaseTemplateName}, true
+	return &tpl.TemplateAdapter{Template: templ, Fs: t.handler.layoutsFs, NameBaseTemplateName: t.nameBaseTemplateName}, true
 }
 
 func (t *htmlTemplates) lookup(name string) *template.Template {
@@ -442,7 +443,8 @@ func (t *textTemplates) Lookup(name string) (tpl.Template, bool) {
 	if templ == nil {
 		return nil, false
 	}
-	return &tpl.TemplateAdapter{Template: templ, Metrics: t.funcster.Deps.Metrics, Fs: t.handler.layoutsFs, NameBaseTemplateName: t.nameBaseTemplateName}, true
+	// return &tpl.TemplateAdapter{Template: templ, Metrics: t.funcster.Deps.Metrics, Fs: t.handler.layoutsFs, NameBaseTemplateName: t.nameBaseTemplateName}, true
+	return &tpl.TemplateAdapter{Template: templ, Fs: t.handler.layoutsFs, NameBaseTemplateName: t.nameBaseTemplateName}, true
 }
 
 func (t *textTemplates) lookup(name string) *texttemplate.Template {

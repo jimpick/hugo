@@ -143,9 +143,11 @@ func (ns *Namespace) Include(name string, contextList ...interface{}) (interface
 		result = template.HTML(w.(fmt.Stringer).String())
 	}
 
+	/*
 	if ns.deps.Metrics != nil {
 		ns.deps.Metrics.TrackValue(n, result)
 	}
+	*/
 
 	return result, nil
 

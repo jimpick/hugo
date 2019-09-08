@@ -14,7 +14,7 @@
 package hugolib
 
 import (
-	"bytes"
+	// "bytes"
 	"context"
 	"fmt"
 	"runtime/trace"
@@ -62,9 +62,11 @@ func (h *HugoSites) Build(config BuildCfg, events ...fsnotify.Event) error {
 
 	}(errCollector, errs)
 
+	/*
 	if h.Metrics != nil {
 		h.Metrics.Reset()
 	}
+	*/
 
 	// Need a pointer as this may be modified.
 	conf := &config
@@ -139,6 +141,7 @@ func (h *HugoSites) Build(config BuildCfg, events ...fsnotify.Event) error {
 		}
 	}
 
+	/*
 	if h.Metrics != nil {
 		var b bytes.Buffer
 		h.Metrics.WriteMetrics(&b)
@@ -147,6 +150,7 @@ func (h *HugoSites) Build(config BuildCfg, events ...fsnotify.Event) error {
 		h.Log.FEEDBACK.Print(b.String())
 		h.Log.FEEDBACK.Println()
 	}
+	*/
 
 	select {
 	// Make sure the channel always gets something.

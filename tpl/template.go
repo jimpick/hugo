@@ -19,7 +19,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
-	"time"
+	// "time"
 
 	"github.com/gohugoio/hugo/output"
 
@@ -34,7 +34,7 @@ import (
 	"text/template/parse"
 
 	bp "github.com/gohugoio/hugo/bufferpool"
-	"github.com/gohugoio/hugo/metrics"
+	// "github.com/gohugoio/hugo/metrics"
 	"github.com/pkg/errors"
 )
 
@@ -123,7 +123,7 @@ type TemplateDebugger interface {
 // TemplateAdapter implements the TemplateExecutor interface.
 type TemplateAdapter struct {
 	Template
-	Metrics metrics.Provider
+	// Metrics metrics.Provider
 
 	Info Info
 
@@ -156,9 +156,11 @@ func (t *TemplateAdapter) Execute(w io.Writer, data interface{}) (execErr error)
 		}
 	}()
 
+	/*
 	if t.Metrics != nil {
 		defer t.Metrics.MeasureSince(t.Name(), time.Now())
 	}
+	*/
 
 	execErr = t.Template.Execute(w, data)
 	if execErr != nil {

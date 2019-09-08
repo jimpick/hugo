@@ -15,7 +15,7 @@ import (
 	"github.com/gohugoio/hugo/media"
 	"github.com/gohugoio/hugo/resources/page"
 
-	"github.com/gohugoio/hugo/metrics"
+	// "github.com/gohugoio/hugo/metrics"
 	"github.com/gohugoio/hugo/output"
 	"github.com/gohugoio/hugo/resources"
 	"github.com/gohugoio/hugo/source"
@@ -81,7 +81,7 @@ type Deps struct {
 
 	translationProvider ResourceProvider
 
-	Metrics metrics.Provider
+	// Metrics metrics.Provider
 
 	// Timeout is configurable in site config.
 	Timeout time.Duration
@@ -259,9 +259,11 @@ func New(cfg DepsCfg) (*Deps, error) {
 		globalErrHandler:    &globalErrHandler{},
 	}
 
+	/*
 	if cfg.Cfg.GetBool("templateMetrics") {
 		d.Metrics = metrics.NewProvider(cfg.Cfg.GetBool("templateMetricsHints"))
 	}
+	*/
 
 	return d, nil
 }
