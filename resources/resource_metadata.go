@@ -30,7 +30,7 @@ import (
 
 var (
 	_ metaAssigner         = (*genericResource)(nil)
-	_ metaAssigner         = (*imageResource)(nil)
+	// _ metaAssigner         = (*imageResource)(nil)
 	_ metaAssignerProvider = (*resourceAdapter)(nil)
 )
 

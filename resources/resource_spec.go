@@ -30,7 +30,7 @@ import (
 	"github.com/gohugoio/hugo/common/loggers"
 	"github.com/gohugoio/hugo/media"
 	"github.com/gohugoio/hugo/output"
-	"github.com/gohugoio/hugo/resources/images"
+	// "github.com/gohugoio/hugo/resources/images"
 	"github.com/gohugoio/hugo/resources/page"
 	"github.com/gohugoio/hugo/resources/resource"
 	"github.com/gohugoio/hugo/tpl"
@@ -44,6 +44,7 @@ func NewSpec(
 	outputFormats output.Formats,
 	mimeTypes media.Types) (*Spec, error) {
 
+	/*
 	imgConfig, err := images.DecodeConfig(s.Cfg.GetStringMap("imaging"))
 	if err != nil {
 		return nil, err
@@ -53,6 +54,7 @@ func NewSpec(
 	if err != nil {
 		return nil, err
 	}
+	*/
 
 	if logger == nil {
 		logger = loggers.NewErrorLogger()
@@ -65,16 +67,17 @@ func NewSpec(
 
 	rs := &Spec{PathSpec: s,
 		Logger:        logger,
-		imaging:       imaging,
+		// imaging:       imaging,
 		MediaTypes:    mimeTypes,
 		OutputFormats: outputFormats,
 		Permalinks:    permalinks,
 		FileCaches:    fileCaches,
+		/*
 		imageCache: newImageCache(
 			fileCaches.ImageCache(),
 
 			s,
-		)}
+		)*/}
 
 	rs.ResourceCache = newResourceCache(rs)
 
@@ -95,9 +98,9 @@ type Spec struct {
 	Permalinks page.PermalinkExpander
 
 	// Holds default filter settings etc.
-	imaging *images.ImageProcessor
+	// imaging *images.ImageProcessor
 
-	imageCache    *imageCache
+	// imageCache    *imageCache
 	ResourceCache *ResourceCache
 	FileCaches    filecache.Caches
 }
@@ -106,6 +109,7 @@ func (r *Spec) New(fd ResourceSourceDescriptor) (resource.Resource, error) {
 	return r.newResourceFor(fd)
 }
 
+/*
 func (r *Spec) CacheStats() string {
 	r.imageCache.mu.RLock()
 	defer r.imageCache.mu.RUnlock()
@@ -123,22 +127,25 @@ func (r *Spec) CacheStats() string {
 
 	return s
 }
+*/
 
 func (r *Spec) ClearCaches() {
-	r.imageCache.clear()
+	// r.imageCache.clear()
 	r.ResourceCache.clear()
 }
 
 func (r *Spec) DeleteCacheByPrefix(prefix string) {
-	r.imageCache.deleteByPrefix(prefix)
+	// r.imageCache.deleteByPrefix(prefix)
 }
 
 // TODO(bep) unify
+/*
 func (r *Spec) IsInImageCache(key string) bool {
 	// This is used for cache pruning. We currently only have images, but we could
 	// imagine expanding on this.
 	return r.imageCache.isInCache(key)
 }
+*/
 
 func (s *Spec) String() string {
 	return "spec"
@@ -276,6 +283,7 @@ func (r *Spec) newResource(sourceFs afero.Fs, fd ResourceSourceDescriptor) (reso
 		fd.RelTargetFilename,
 		mimeType)
 
+	/*
 	if mimeType.MainType == "image" {
 		imgFormat, ok := images.ImageFormatFromExt(ext)
 		if ok {
@@ -288,6 +296,7 @@ func (r *Spec) newResource(sourceFs afero.Fs, fd ResourceSourceDescriptor) (reso
 		}
 
 	}
+	*/
 
 	return newResourceAdapter(gr.spec, fd.LazyPublish, gr), nil
 
