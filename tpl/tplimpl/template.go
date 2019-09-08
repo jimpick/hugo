@@ -941,6 +941,7 @@ func (t *templateHandler) addTemplateFile(name, baseTemplatePath, path string) e
 	// get the suffix and switch on that
 	ext := filepath.Ext(path)
 	switch ext {
+	/*
 	case ".amber":
 		//	Only HTML support for Amber
 		withoutExt := strings.TrimSuffix(name, filepath.Ext(name))
@@ -990,6 +991,7 @@ func (t *templateHandler) addTemplateFile(name, baseTemplatePath, path string) e
 		}
 
 		return t.addAceTemplate(name, baseTemplatePath, path, baseContent, innerContent)
+	*/
 	default:
 
 		if baseTemplatePath != "" {

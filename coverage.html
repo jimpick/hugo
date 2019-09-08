@@ -478,7 +478,7 @@
 				
 				<option value="file211">github.com/gohugoio/hugo/tpl/partials/init.go (80.0%)</option>
 				
-				<option value="file212">github.com/gohugoio/hugo/tpl/partials/partials.go (67.8%)</option>
+				<option value="file212">github.com/gohugoio/hugo/tpl/partials/partials.go (69.5%)</option>
 				
 				<option value="file213">github.com/gohugoio/hugo/tpl/path/init.go (90.0%)</option>
 				
@@ -518,47 +518,43 @@
 				
 				<option value="file231">github.com/gohugoio/hugo/tpl/time/time.go (8.3%)</option>
 				
-				<option value="file232">github.com/gohugoio/hugo/tpl/tplimpl/ace.go (0.0%)</option>
+				<option value="file232">github.com/gohugoio/hugo/tpl/tplimpl/shortcodes.go (44.7%)</option>
 				
-				<option value="file233">github.com/gohugoio/hugo/tpl/tplimpl/amber_compiler.go (0.0%)</option>
+				<option value="file233">github.com/gohugoio/hugo/tpl/tplimpl/template.go (62.5%)</option>
 				
-				<option value="file234">github.com/gohugoio/hugo/tpl/tplimpl/shortcodes.go (44.7%)</option>
+				<option value="file234">github.com/gohugoio/hugo/tpl/tplimpl/templateFuncster.go (100.0%)</option>
 				
-				<option value="file235">github.com/gohugoio/hugo/tpl/tplimpl/template.go (58.0%)</option>
+				<option value="file235">github.com/gohugoio/hugo/tpl/tplimpl/templateProvider.go (60.0%)</option>
 				
-				<option value="file236">github.com/gohugoio/hugo/tpl/tplimpl/templateFuncster.go (100.0%)</option>
+				<option value="file236">github.com/gohugoio/hugo/tpl/tplimpl/template_ast_transformers.go (81.0%)</option>
 				
-				<option value="file237">github.com/gohugoio/hugo/tpl/tplimpl/templateProvider.go (60.0%)</option>
+				<option value="file237">github.com/gohugoio/hugo/tpl/tplimpl/template_errors.go (0.0%)</option>
 				
-				<option value="file238">github.com/gohugoio/hugo/tpl/tplimpl/template_ast_transformers.go (81.0%)</option>
+				<option value="file238">github.com/gohugoio/hugo/tpl/tplimpl/template_funcs.go (85.7%)</option>
 				
-				<option value="file239">github.com/gohugoio/hugo/tpl/tplimpl/template_errors.go (0.0%)</option>
+				<option value="file239">github.com/gohugoio/hugo/tpl/transform/init.go (92.3%)</option>
 				
-				<option value="file240">github.com/gohugoio/hugo/tpl/tplimpl/template_funcs.go (85.7%)</option>
+				<option value="file240">github.com/gohugoio/hugo/tpl/transform/remarshal.go (0.0%)</option>
 				
-				<option value="file241">github.com/gohugoio/hugo/tpl/transform/init.go (92.3%)</option>
+				<option value="file241">github.com/gohugoio/hugo/tpl/transform/transform.go (11.1%)</option>
 				
-				<option value="file242">github.com/gohugoio/hugo/tpl/transform/remarshal.go (0.0%)</option>
+				<option value="file242">github.com/gohugoio/hugo/tpl/transform/unmarshal.go (0.0%)</option>
 				
-				<option value="file243">github.com/gohugoio/hugo/tpl/transform/transform.go (11.1%)</option>
+				<option value="file243">github.com/gohugoio/hugo/tpl/urls/init.go (92.9%)</option>
 				
-				<option value="file244">github.com/gohugoio/hugo/tpl/transform/unmarshal.go (0.0%)</option>
+				<option value="file244">github.com/gohugoio/hugo/tpl/urls/urls.go (6.5%)</option>
 				
-				<option value="file245">github.com/gohugoio/hugo/tpl/urls/init.go (92.9%)</option>
+				<option value="file245">github.com/gohugoio/hugo/transform/chain.go (55.6%)</option>
 				
-				<option value="file246">github.com/gohugoio/hugo/tpl/urls/urls.go (6.5%)</option>
+				<option value="file246">github.com/gohugoio/hugo/transform/livereloadinject/livereloadinject.go (0.0%)</option>
 				
-				<option value="file247">github.com/gohugoio/hugo/transform/chain.go (55.6%)</option>
+				<option value="file247">github.com/gohugoio/hugo/transform/metainject/hugogenerator.go (26.7%)</option>
 				
-				<option value="file248">github.com/gohugoio/hugo/transform/livereloadinject/livereloadinject.go (0.0%)</option>
+				<option value="file248">github.com/gohugoio/hugo/transform/urlreplacers/absurl.go (50.0%)</option>
 				
-				<option value="file249">github.com/gohugoio/hugo/transform/metainject/hugogenerator.go (26.7%)</option>
+				<option value="file249">github.com/gohugoio/hugo/transform/urlreplacers/absurlreplacer.go (49.4%)</option>
 				
-				<option value="file250">github.com/gohugoio/hugo/transform/urlreplacers/absurl.go (50.0%)</option>
-				
-				<option value="file251">github.com/gohugoio/hugo/transform/urlreplacers/absurlreplacer.go (49.4%)</option>
-				
-				<option value="file252">github.com/gohugoio/hugo/watcher/batcher.go (0.0%)</option>
+				<option value="file250">github.com/gohugoio/hugo/watcher/batcher.go (0.0%)</option>
 				
 				</select>
 			</div>
@@ -45620,7 +45616,7 @@ func (ns *Namespace) getOrCreate(key, name string, context interface{}) (interfa
         <span class="cov8" title="1">ns.cachedPartials.Lock()
         defer ns.cachedPartials.Unlock()
         // Double-check.
-        if p2, ok := ns.cachedPartials.p[key]; ok </span><span class="cov0" title="0">{
+        if p2, ok := ns.cachedPartials.p[key]; ok </span><span class="cov8" title="1">{
                 return p2, nil
         }</span>
         <span class="cov8" title="1">ns.cachedPartials.p[key] = p
@@ -48104,122 +48100,6 @@ func (ns *Namespace) Duration(unit interface{}, number interface{}) (_time.Durat
 package tplimpl
 
 import (
-        "path/filepath"
-
-        "strings"
-
-        "github.com/yosssi/ace"
-)
-
-func (t *templateHandler) addAceTemplate(name, basePath, innerPath string, baseContent, innerContent []byte) error <span class="cov0" title="0">{
-        t.checkState()
-        var base, inner *ace.File
-        withoutExt := name[:len(name)-len(filepath.Ext(innerPath))]
-        name = withoutExt + ".html"
-
-        // Fixes issue #1178
-        basePath = strings.Replace(basePath, "\\", "/", -1)
-        innerPath = strings.Replace(innerPath, "\\", "/", -1)
-
-        if basePath != "" </span><span class="cov0" title="0">{
-                base = ace.NewFile(basePath, baseContent)
-                inner = ace.NewFile(innerPath, innerContent)
-        }</span> else<span class="cov0" title="0"> {
-                base = ace.NewFile(innerPath, innerContent)
-                inner = ace.NewFile("", []byte{})
-        }</span>
-
-        <span class="cov0" title="0">parsed, err := ace.ParseSource(ace.NewSource(base, inner, []*ace.File{}), nil)
-        if err != nil </span><span class="cov0" title="0">{
-                t.errors = append(t.errors, &amp;templateErr{name: name, err: err})
-                return err
-        }</span>
-
-        <span class="cov0" title="0">templ, err := ace.CompileResultWithTemplate(t.html.t.New(name), parsed, nil)
-        if err != nil </span><span class="cov0" title="0">{
-                t.errors = append(t.errors, &amp;templateErr{name: name, err: err})
-                return err
-        }</span>
-
-        <span class="cov0" title="0">typ := resolveTemplateType(name)
-
-        c, err := applyTemplateTransformersToHMLTTemplate(typ, templ)
-        if err != nil </span><span class="cov0" title="0">{
-                return err
-        }</span>
-
-        <span class="cov0" title="0">if typ == templateShortcode </span><span class="cov0" title="0">{
-                t.addShortcodeVariant(name, c.Info, templ)
-        }</span> else<span class="cov0" title="0"> {
-                t.templateInfo[name] = c.Info
-        }</span>
-
-        <span class="cov0" title="0">return nil</span>
-}
-</pre>
-		
-		<pre class="file" id="file233" style="display: none">// Copyright 2017 The Hugo Authors. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-package tplimpl
-
-import (
-        "html/template"
-
-        "github.com/eknkc/amber"
-        "github.com/spf13/afero"
-)
-
-func (t *templateHandler) compileAmberWithTemplate(b []byte, path string, templ *template.Template) (*template.Template, error) <span class="cov0" title="0">{
-        c := amber.New()
-        c.Options.VirtualFilesystem = afero.NewHttpFs(t.layoutsFs)
-
-        if err := c.ParseData(b, path); err != nil </span><span class="cov0" title="0">{
-                return nil, err
-        }</span>
-
-        <span class="cov0" title="0">data, err := c.CompileString()
-
-        if err != nil </span><span class="cov0" title="0">{
-                return nil, err
-        }</span>
-
-        <span class="cov0" title="0">tpl, err := templ.Funcs(t.amberFuncMap).Parse(data)
-
-        if err != nil </span><span class="cov0" title="0">{
-                return nil, err
-        }</span>
-
-        <span class="cov0" title="0">return tpl, nil</span>
-}
-</pre>
-		
-		<pre class="file" id="file234" style="display: none">// Copyright 2019 The Hugo Authors. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-package tplimpl
-
-import (
         "strings"
 
         "github.com/gohugoio/hugo/tpl"
@@ -48366,7 +48246,7 @@ func isInternal(name string) bool <span class="cov0" title="0">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file235" style="display: none">// Copyright 2019 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file233" style="display: none">// Copyright 2019 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -49309,55 +49189,57 @@ func (t *templateHandler) addTemplateFile(name, baseTemplatePath, path string) e
         // get the suffix and switch on that
         <span class="cov8" title="1">ext := filepath.Ext(path)
         switch ext </span>{
-        case ".amber":<span class="cov0" title="0">
+        /*
+        case ".amber":
                 //        Only HTML support for Amber
                 withoutExt := strings.TrimSuffix(name, filepath.Ext(name))
                 templateName := withoutExt + ".html"
                 b, err := afero.ReadFile(t.Layouts.Fs, path)
 
-                if err != nil </span><span class="cov0" title="0">{
+                if err != nil {
                         return err
-                }</span>
+                }
 
-                <span class="cov0" title="0">amberMu.Lock()
+                amberMu.Lock()
                 templ, err := t.compileAmberWithTemplate(b, path, t.html.t.New(templateName))
                 amberMu.Unlock()
-                if err != nil </span><span class="cov0" title="0">{
+                if err != nil {
                         return err
-                }</span>
+                }
 
-                <span class="cov0" title="0">typ := resolveTemplateType(name)
+                typ := resolveTemplateType(name)
 
                 c, err := applyTemplateTransformersToHMLTTemplate(typ, templ)
-                if err != nil </span><span class="cov0" title="0">{
+                if err != nil {
                         return err
-                }</span>
+                }
 
-                <span class="cov0" title="0">if typ == templateShortcode </span><span class="cov0" title="0">{
+                if typ == templateShortcode {
                         t.addShortcodeVariant(templateName, c.Info, templ)
-                }</span> else<span class="cov0" title="0"> {
+                } else {
                         t.templateInfo[name] = c.Info
-                }</span>
+                }
 
-                <span class="cov0" title="0">return nil</span>
+                return nil
 
-        case ".ace":<span class="cov0" title="0">
+        case ".ace":
                 //        Only HTML support for Ace
                 var innerContent, baseContent []byte
                 innerContent, err := afero.ReadFile(t.Layouts.Fs, path)
 
-                if err != nil </span><span class="cov0" title="0">{
+                if err != nil {
                         return err
-                }</span>
-
-                <span class="cov0" title="0">if baseTemplatePath != "" </span><span class="cov0" title="0">{
-                        baseContent, err = afero.ReadFile(t.Layouts.Fs, baseTemplatePath)
-                        if err != nil </span><span class="cov0" title="0">{
-                                return err
-                        }</span>
                 }
 
-                <span class="cov0" title="0">return t.addAceTemplate(name, baseTemplatePath, path, baseContent, innerContent)</span>
+                if baseTemplatePath != "" {
+                        baseContent, err = afero.ReadFile(t.Layouts.Fs, baseTemplatePath)
+                        if err != nil {
+                                return err
+                        }
+                }
+
+                return t.addAceTemplate(name, baseTemplatePath, path, baseContent, innerContent)
+        */
         default:<span class="cov8" title="1">
 
                 if baseTemplatePath != "" </span><span class="cov8" title="1">{
@@ -49427,7 +49309,7 @@ func isBaseTemplate(path string) bool <span class="cov8" title="1">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file236" style="display: none">// Copyright 2019 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file234" style="display: none">// Copyright 2019 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -49462,7 +49344,7 @@ func newTemplateFuncster(deps *deps.Deps) *templateFuncster <span class="cov8" t
 }</span>
 </pre>
 		
-		<pre class="file" id="file237" style="display: none">// Copyright 2017-present The Hugo Authors. All rights reserved.
+		<pre class="file" id="file235" style="display: none">// Copyright 2017-present The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -49527,7 +49409,7 @@ func (*TemplateProvider) Clone(d *deps.Deps) error <span class="cov0" title="0">
 }</span>
 </pre>
 		
-		<pre class="file" id="file238" style="display: none">// Copyright 2016 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file236" style="display: none">// Copyright 2016 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50064,7 +49946,7 @@ func (d decl) isKeyword(s string) bool <span class="cov8" title="1">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file239" style="display: none">// Copyright 2018 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file237" style="display: none">// Copyright 2018 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50112,7 +49994,7 @@ func (info templateInfo) errWithFileContext(what string, err error) error <span 
 }</span>
 </pre>
 		
-		<pre class="file" id="file240" style="display: none">// Copyright 2017-present The Hugo Authors. All rights reserved.
+		<pre class="file" id="file238" style="display: none">// Copyright 2017-present The Hugo Authors. All rights reserved.
 //
 // Portions Copyright The Go Authors.
 
@@ -50194,7 +50076,7 @@ func (t *templateFuncster) initFuncMap(funcMap template.FuncMap) <span class="co
 }</span>
 </pre>
 		
-		<pre class="file" id="file241" style="display: none">// Copyright 2017 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file239" style="display: none">// Copyright 2017 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50309,7 +50191,7 @@ func init() <span class="cov8" title="1">{
 }
 </pre>
 		
-		<pre class="file" id="file242" style="display: none">package transform
+		<pre class="file" id="file240" style="display: none">package transform
 
 import (
         "bytes"
@@ -50373,7 +50255,7 @@ func toFormatMark(format string) (metadecoders.Format, error) <span class="cov0"
 }
 </pre>
 		
-		<pre class="file" id="file243" style="display: none">// Copyright 2017 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file241" style="display: none">// Copyright 2017 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50500,7 +50382,7 @@ func (ns *Namespace) Plainify(s interface{}) (string, error) <span class="cov0" 
 }
 </pre>
 		
-		<pre class="file" id="file244" style="display: none">// Copyright 2019 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file242" style="display: none">// Copyright 2019 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50669,7 +50551,7 @@ func stringToRune(v interface{}) (rune, error) <span class="cov0" title="0">{
 }
 </pre>
 		
-		<pre class="file" id="file245" style="display: none">// Copyright 2017 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file243" style="display: none">// Copyright 2017 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50745,7 +50627,7 @@ func init() <span class="cov8" title="1">{
 }
 </pre>
 		
-		<pre class="file" id="file246" style="display: none">// Copyright 2017 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file244" style="display: none">// Copyright 2017 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50929,7 +50811,7 @@ func (ns *Namespace) AbsLangURL(a interface{}) (template.HTML, error) <span clas
 }
 </pre>
 		
-		<pre class="file" id="file247" style="display: none">// Copyright 2018 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file245" style="display: none">// Copyright 2018 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -51043,7 +50925,7 @@ func (c *Chain) Apply(to io.Writer, from io.Reader) error <span class="cov8" tit
 }
 </pre>
 		
-		<pre class="file" id="file248" style="display: none">// Copyright 2018 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file246" style="display: none">// Copyright 2018 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -51092,7 +50974,7 @@ func New(port int) transform.Transformer <span class="cov0" title="0">{
 }
 </pre>
 		
-		<pre class="file" id="file249" style="display: none">// Copyright 2018 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file247" style="display: none">// Copyright 2018 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -51149,7 +51031,7 @@ func HugoGenerator(ft transform.FromTo) error <span class="cov8" title="1">{
 }
 </pre>
 		
-		<pre class="file" id="file250" style="display: none">// Copyright 2018 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file248" style="display: none">// Copyright 2018 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -51187,7 +51069,7 @@ func NewAbsURLInXMLTransformer(path string) transform.Transformer <span class="c
 }
 </pre>
 		
-		<pre class="file" id="file251" style="display: none">// Copyright 2018 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file249" style="display: none">// Copyright 2018 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -51449,7 +51331,7 @@ func (au *absURLReplacer) replaceInXML(path string, ct transform.FromTo) <span c
 }</span>
 </pre>
 		
-		<pre class="file" id="file252" style="display: none">// Copyright 2015 The Hugo Authors. All rights reserved.
+		<pre class="file" id="file250" style="display: none">// Copyright 2015 The Hugo Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
