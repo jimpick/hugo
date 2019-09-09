@@ -136,9 +136,9 @@
 				
 				<option value="file40">github.com/gohugoio/hugo/docshelper/docs.go (50.0%)</option>
 				
-				<option value="file41">github.com/gohugoio/hugo/helpers/content.go (38.7%)</option>
+				<option value="file41">github.com/gohugoio/hugo/helpers/content.go (43.6%)</option>
 				
-				<option value="file42">github.com/gohugoio/hugo/helpers/content_renderer.go (39.1%)</option>
+				<option value="file42">github.com/gohugoio/hugo/helpers/content_renderer.go (40.9%)</option>
 				
 				<option value="file43">github.com/gohugoio/hugo/helpers/general.go (27.2%)</option>
 				
@@ -280,7 +280,7 @@
 				
 				<option value="file112">github.com/gohugoio/hugo/output/docshelper.go (9.5%)</option>
 				
-				<option value="file113">github.com/gohugoio/hugo/output/layout.go (86.3%)</option>
+				<option value="file113">github.com/gohugoio/hugo/output/layout.go (88.4%)</option>
 				
 				<option value="file114">github.com/gohugoio/hugo/output/layout_base.go (88.2%)</option>
 				
@@ -6960,7 +6960,7 @@ import (
 
         bp "github.com/gohugoio/hugo/bufferpool"
         "github.com/gohugoio/hugo/config"
-        "github.com/miekg/mmark"
+        // "github.com/miekg/mmark"
         "github.com/mitchellh/mapstructure"
         "github.com/russross/blackfriday"
         jww "github.com/spf13/jwalterweatherman"
@@ -7118,6 +7118,7 @@ var blackfridayExtensionMap = map[string]int{
 
 var stripHTMLReplacer = strings.NewReplacer("\n", " ", "&lt;/p&gt;", "\n", "&lt;br&gt;", "\n", "&lt;br /&gt;", "\n")
 
+/*
 var mmarkExtensionMap = map[string]int{
         "tables":                 mmark.EXTENSION_TABLES,
         "fencedCode":             mmark.EXTENSION_FENCED_CODE,
@@ -7130,6 +7131,7 @@ var mmarkExtensionMap = map[string]int{
         "headerIds":              mmark.EXTENSION_HEADER_IDS,
         "autoHeaderIds":          mmark.EXTENSION_AUTO_HEADER_IDS,
 }
+*/
 
 // StripHTML accepts a string, strips out all HTML tags and returns it.
 func StripHTML(s string) string <span class="cov8" title="1">{
@@ -7294,7 +7296,8 @@ func (c ContentSpec) markdownRender(ctx *RenderingContext) []byte <span class="c
 }
 
 // getMmarkHTMLRenderer creates a new mmark HTML Renderer with the given configuration.
-func (c *ContentSpec) getMmarkHTMLRenderer(defaultFlags int, ctx *RenderingContext) mmark.Renderer <span class="cov0" title="0">{
+/*
+func (c *ContentSpec) getMmarkHTMLRenderer(defaultFlags int, ctx *RenderingContext) mmark.Renderer {
         renderParameters := mmark.HtmlRendererParameters{
                 FootnoteAnchorPrefix:       c.footnoteAnchorPrefix,
                 FootnoteReturnLinkContents: c.footnoteReturnLinkContents,
@@ -7302,26 +7305,26 @@ func (c *ContentSpec) getMmarkHTMLRenderer(defaultFlags int, ctx *RenderingConte
 
         b := len(ctx.DocumentID) != 0
 
-        if ctx.Config == nil </span><span class="cov0" title="0">{
-                panic(fmt.Sprintf("RenderingContext of %q doesn't have a config", ctx.DocumentID))</span>
+        if ctx.Config == nil {
+                panic(fmt.Sprintf("RenderingContext of %q doesn't have a config", ctx.DocumentID))
         }
 
-        <span class="cov0" title="0">if b &amp;&amp; !ctx.Config.PlainIDAnchors </span><span class="cov0" title="0">{
+        if b &amp;&amp; !ctx.Config.PlainIDAnchors {
                 renderParameters.FootnoteAnchorPrefix = ctx.DocumentID + ":" + renderParameters.FootnoteAnchorPrefix
                 // renderParameters.HeaderIDSuffix = ":" + ctx.DocumentId
-        }</span>
+        }
 
-        <span class="cov0" title="0">htmlFlags := defaultFlags
+        htmlFlags := defaultFlags
         htmlFlags |= mmark.HTML_FOOTNOTE_RETURN_LINKS
 
         return &amp;HugoMmarkHTMLRenderer{
                 cs:       c,
                 Renderer: mmark.HtmlRendererWithParameters(htmlFlags, "", "", renderParameters),
                 Cfg:      c.Cfg,
-        }</span>
+        }
 }
 
-func getMmarkExtensions(ctx *RenderingContext) int <span class="cov0" title="0">{
+func getMmarkExtensions(ctx *RenderingContext) int {
         flags := 0
         flags |= mmark.EXTENSION_TABLES
         flags |= mmark.EXTENSION_FENCED_CODE
@@ -7337,22 +7340,23 @@ func getMmarkExtensions(ctx *RenderingContext) int <span class="cov0" title="0">
         flags |= mmark.EXTENSION_NO_EMPTY_LINE_BEFORE_BLOCK
         flags |= mmark.EXTENSION_INCLUDE
 
-        if ctx.Config == nil </span><span class="cov0" title="0">{
-                panic(fmt.Sprintf("RenderingContext of %q doesn't have a config", ctx.DocumentID))</span>
+        if ctx.Config == nil {
+                panic(fmt.Sprintf("RenderingContext of %q doesn't have a config", ctx.DocumentID))
         }
 
-        <span class="cov0" title="0">for _, extension := range ctx.Config.Extensions </span><span class="cov0" title="0">{
-                if flag, ok := mmarkExtensionMap[extension]; ok </span><span class="cov0" title="0">{
+        for _, extension := range ctx.Config.Extensions {
+                if flag, ok := mmarkExtensionMap[extension]; ok {
                         flags |= flag
-                }</span>
+                }
         }
-        <span class="cov0" title="0">return flags</span>
+        return flags
 }
 
-func (c ContentSpec) mmarkRender(ctx *RenderingContext) []byte <span class="cov0" title="0">{
+func (c ContentSpec) mmarkRender(ctx *RenderingContext) []byte {
         return mmark.Parse(ctx.Content, c.getMmarkHTMLRenderer(0, ctx),
                 getMmarkExtensions(ctx)).Bytes()
-}</span>
+}
+*/
 
 // ExtractTOC extracts Table of Contents from content.
 func ExtractTOC(content []byte) (newcontent []byte, toc []byte) <span class="cov8" title="1">{
@@ -7415,8 +7419,10 @@ func (c ContentSpec) RenderBytes(ctx *RenderingContext) []byte <span class="cov8
                 return c.markdownRender(ctx)</span>
         case "asciidoc":<span class="cov0" title="0">
                 return getAsciidocContent(ctx)</span>
-        case "mmark":<span class="cov0" title="0">
-                return c.mmarkRender(ctx)</span>
+                /*
+        case "mmark":
+                return c.mmarkRender(ctx)
+                */
         case "rst":<span class="cov0" title="0">
                 return getRstContent(ctx)</span>
                 /*
@@ -7750,8 +7756,8 @@ import (
         "bytes"
         // "strings"
 
-        "github.com/gohugoio/hugo/config"
-        "github.com/miekg/mmark"
+        // "github.com/gohugoio/hugo/config"
+        // "github.com/miekg/mmark"
         "github.com/russross/blackfriday"
 )
 
@@ -7824,6 +7830,7 @@ func (r *HugoHTMLRenderer) List(out *bytes.Buffer, text func() bool, flags int) 
 
 // HugoMmarkHTMLRenderer wraps a mmark.Renderer, typically a mmark.html,
 // enabling Hugo to customise the rendering experience.
+/*
 type HugoMmarkHTMLRenderer struct {
         cs *ContentSpec
         mmark.Renderer
@@ -7832,17 +7839,16 @@ type HugoMmarkHTMLRenderer struct {
 
 // BlockCode renders a given text as a block of code.
 // Pygments is used if it is setup to handle code fences.
-func (r *HugoMmarkHTMLRenderer) BlockCode(out *bytes.Buffer, text []byte, lang string, caption []byte, subfigure bool, callouts bool) <span class="cov0" title="0">{
-        /*
+func (r *HugoMmarkHTMLRenderer) BlockCode(out *bytes.Buffer, text []byte, lang string, caption []byte, subfigure bool, callouts bool) {
         if r.Cfg.GetBool("pygmentsCodeFences") &amp;&amp; (lang != "" || r.Cfg.GetBool("pygmentsCodeFencesGuessSyntax")) {
                 str := strings.Trim(string(text), "\n\r")
                 highlighted, _ := r.cs.Highlight(str, lang, "")
                 out.WriteString(highlighted)
         } else {
-                */
                 r.Renderer.BlockCode(out, text, lang, caption, subfigure, callouts)
-        // }
-}</span>
+        }
+}
+*/
 </pre>
 		
 		<pre class="file" id="file43" style="display: none">// Copyright 2019 The Hugo Authors. All rights reserved.
@@ -27979,7 +27985,7 @@ func (l *LayoutHandler) For(d LayoutDescriptor, f Format) ([]string, error) <spa
         // We will get lots of requests for the same layouts, so avoid recalculations.
         key := layoutCacheKey{d, f.Name}
         l.mu.RLock()
-        if cacheVal, found := l.cache[key]; found </span><span class="cov0" title="0">{
+        if cacheVal, found := l.cache[key]; found </span><span class="cov8" title="1">{
                 l.mu.RUnlock()
                 return cacheVal, nil
         }</span>

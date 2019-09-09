@@ -17,8 +17,8 @@ import (
 	"bytes"
 	// "strings"
 
-	"github.com/gohugoio/hugo/config"
-	"github.com/miekg/mmark"
+	// "github.com/gohugoio/hugo/config"
+	// "github.com/miekg/mmark"
 	"github.com/russross/blackfriday"
 )
 
@@ -91,6 +91,7 @@ func (r *HugoHTMLRenderer) List(out *bytes.Buffer, text func() bool, flags int) 
 
 // HugoMmarkHTMLRenderer wraps a mmark.Renderer, typically a mmark.html,
 // enabling Hugo to customise the rendering experience.
+/*
 type HugoMmarkHTMLRenderer struct {
 	cs *ContentSpec
 	mmark.Renderer
@@ -100,13 +101,12 @@ type HugoMmarkHTMLRenderer struct {
 // BlockCode renders a given text as a block of code.
 // Pygments is used if it is setup to handle code fences.
 func (r *HugoMmarkHTMLRenderer) BlockCode(out *bytes.Buffer, text []byte, lang string, caption []byte, subfigure bool, callouts bool) {
-	/*
 	if r.Cfg.GetBool("pygmentsCodeFences") && (lang != "" || r.Cfg.GetBool("pygmentsCodeFencesGuessSyntax")) {
 		str := strings.Trim(string(text), "\n\r")
 		highlighted, _ := r.cs.Highlight(str, lang, "")
 		out.WriteString(highlighted)
 	} else {
-		*/
 		r.Renderer.BlockCode(out, text, lang, caption, subfigure, callouts)
-	// }
+	}
 }
+*/

@@ -15,7 +15,6 @@ require (
 	github.com/markbates/inflect v0.0.0-00010101000000-000000000000
 	github.com/mattn/go-isatty v0.0.9
 	github.com/mattn/go-runewidth v0.0.4 // indirect
-	github.com/miekg/mmark v1.3.6
 	github.com/mitchellh/hashstructure v1.0.0
 	github.com/mitchellh/mapstructure v1.1.2
 	github.com/nicksnyder/go-i18n v1.10.0

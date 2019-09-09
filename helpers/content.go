@@ -31,7 +31,7 @@ import (
 
 	bp "github.com/gohugoio/hugo/bufferpool"
 	"github.com/gohugoio/hugo/config"
-	"github.com/miekg/mmark"
+	// "github.com/miekg/mmark"
 	"github.com/mitchellh/mapstructure"
 	"github.com/russross/blackfriday"
 	jww "github.com/spf13/jwalterweatherman"
@@ -189,6 +189,7 @@ var blackfridayExtensionMap = map[string]int{
 
 var stripHTMLReplacer = strings.NewReplacer("\n", " ", "</p>", "\n", "<br>", "\n", "<br />", "\n")
 
+/*
 var mmarkExtensionMap = map[string]int{
 	"tables":                 mmark.EXTENSION_TABLES,
 	"fencedCode":             mmark.EXTENSION_FENCED_CODE,
@@ -201,6 +202,7 @@ var mmarkExtensionMap = map[string]int{
 	"headerIds":              mmark.EXTENSION_HEADER_IDS,
 	"autoHeaderIds":          mmark.EXTENSION_AUTO_HEADER_IDS,
 }
+*/
 
 // StripHTML accepts a string, strips out all HTML tags and returns it.
 func StripHTML(s string) string {
@@ -365,6 +367,7 @@ func (c ContentSpec) markdownRender(ctx *RenderingContext) []byte {
 }
 
 // getMmarkHTMLRenderer creates a new mmark HTML Renderer with the given configuration.
+/*
 func (c *ContentSpec) getMmarkHTMLRenderer(defaultFlags int, ctx *RenderingContext) mmark.Renderer {
 	renderParameters := mmark.HtmlRendererParameters{
 		FootnoteAnchorPrefix:       c.footnoteAnchorPrefix,
@@ -424,6 +427,7 @@ func (c ContentSpec) mmarkRender(ctx *RenderingContext) []byte {
 	return mmark.Parse(ctx.Content, c.getMmarkHTMLRenderer(0, ctx),
 		getMmarkExtensions(ctx)).Bytes()
 }
+*/
 
 // ExtractTOC extracts Table of Contents from content.
 func ExtractTOC(content []byte) (newcontent []byte, toc []byte) {
@@ -486,8 +490,10 @@ func (c ContentSpec) RenderBytes(ctx *RenderingContext) []byte {
 		return c.markdownRender(ctx)
 	case "asciidoc":
 		return getAsciidocContent(ctx)
+		/*
 	case "mmark":
 		return c.mmarkRender(ctx)
+		*/
 	case "rst":
 		return getRstContent(ctx)
 		/*
