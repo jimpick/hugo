@@ -28,7 +28,7 @@ import (
 	"github.com/gohugoio/hugo/resources/resource_factories/bundler"
 	"github.com/gohugoio/hugo/resources/resource_factories/create"
 	"github.com/gohugoio/hugo/resources/resource_transformers/integrity"
-	"github.com/gohugoio/hugo/resources/resource_transformers/minifier"
+	// "github.com/gohugoio/hugo/resources/resource_transformers/minifier"
 	"github.com/gohugoio/hugo/resources/resource_transformers/postcss"
 	"github.com/gohugoio/hugo/resources/resource_transformers/templates"
 	"github.com/spf13/cast"
@@ -52,7 +52,7 @@ func New(deps *deps.Deps) (*Namespace, error) {
 		createClient:    create.New(deps.ResourceSpec),
 		bundlerClient:   bundler.New(deps.ResourceSpec),
 		integrityClient: integrity.New(deps.ResourceSpec),
-		minifyClient:    minifier.New(deps.ResourceSpec),
+		// minifyClient:    minifier.New(deps.ResourceSpec),
 		postcssClient:   postcss.New(deps.ResourceSpec),
 		templatesClient: templates.New(deps.ResourceSpec, deps.TextTmpl),
 	}, nil
@@ -66,7 +66,7 @@ type Namespace struct {
 	bundlerClient   *bundler.Client
 	// scssClient      *scss.Client
 	integrityClient *integrity.Client
-	minifyClient    *minifier.Client
+	// minifyClient    *minifier.Client
 	postcssClient   *postcss.Client
 	templatesClient *templates.Client
 }
@@ -216,9 +216,11 @@ func (ns *Namespace) Fingerprint(args ...interface{}) (resource.Resource, error)
 
 // Minify minifies the given Resource using the MediaType to pick the correct
 // minifier.
+/*
 func (ns *Namespace) Minify(r resources.ResourceTransformer) (resource.Resource, error) {
 	return ns.minifyClient.Minify(r)
 }
+*/
 
 // ToCSS converts the given Resource to CSS. You can optional provide an Options
 // object or a target path (string) as first argument.

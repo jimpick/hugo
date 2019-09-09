@@ -45,10 +45,12 @@ func init() {
 			[][2]string{},
 		)
 
+		/*
 		ns.AddMethodMapping(ctx.Minify,
 			[]string{"minify"},
 			[][2]string{},
 		)
+		*/
 
 		/*
 		ns.AddMethodMapping(ctx.ToCSS,

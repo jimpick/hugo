@@ -20,7 +20,7 @@ import (
 
 	"github.com/gohugoio/hugo/media"
 
-	"github.com/gohugoio/hugo/minifiers"
+	// "github.com/gohugoio/hugo/minifiers"
 
 	bp "github.com/gohugoio/hugo/bufferpool"
 	"github.com/gohugoio/hugo/helpers"
@@ -68,17 +68,19 @@ type Descriptor struct {
 // publisher prepares and publishes an item to the defined destination, e.g. /public.
 type DestinationPublisher struct {
 	fs     afero.Fs
-	minify bool
-	min    minifiers.Client
+	//minify bool
+	//min    minifiers.Client
 }
 
 // NewDestinationPublisher creates a new DestinationPublisher.
 func NewDestinationPublisher(fs afero.Fs, outputFormats output.Formats, mediaTypes media.Types, minify bool) DestinationPublisher {
 	pub := DestinationPublisher{fs: fs}
+	/*
 	if minify {
 		pub.min = minifiers.New(mediaTypes, outputFormats)
 		pub.minify = true
 	}
+	*/
 	return pub
 }
 
@@ -152,12 +154,14 @@ func (p DestinationPublisher) createTransformerChain(f Descriptor) transform.Cha
 
 	}
 
+	/*
 	if p.minify {
 		minifyTransformer := p.min.Transformer(f.OutputFormat.MediaType)
 		if minifyTransformer != nil {
 			transformers = append(transformers, minifyTransformer)
 		}
 	}
+	*/
 
 	return transformers
 
