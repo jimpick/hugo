@@ -1,15 +1,21 @@
 function initBrowserFs () {
   const promise = new Promise((resolve, reject) => {
     BrowserFS.configure({
-      fs: "InMemory"
+      fs: "HTTPRequest",
+      options: {
+        // baseUrl: "/quickstart"
+      }
     }, function(e) {
       if (e) {
           return reject (e)
       }
       // Otherwise, BrowserFS is ready-to-use!
-      var fs = BrowserFS.BFSRequire('fs');
-      var Buffer = BrowserFS.BFSRequire('buffer').Buffer;
-      resolve [fs, buffer]
+      var fs = BrowserFS.BFSRequire('fs')
+      var Buffer = BrowserFS.BFSRequire('buffer').Buffer
+      fs.readFile('/quickstart/config.toml', (err, data) => {
+        console.log('Jim5', err, data.toString())
+      })
+      resolve([fs, Buffer])
     })
   })
   return promise
