@@ -1,9 +1,10 @@
 function initBrowserFs () {
   const promise = new Promise((resolve, reject) => {
     BrowserFS.configure({
-      fs: "HTTPRequest",
+      fs: "MountableFileSystem",
       options: {
-        // baseUrl: "/quickstart"
+        "/quickstart": { fs: "HTTPRequest", options: { baseUrl: "/quickstart"} },
+        "/tmp": { fs: "InMemory" }
       }
     }, function(e) {
       if (e) {
