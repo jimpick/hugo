@@ -8,7 +8,8 @@ wasm:
 	GOOS=js GOARCH=wasm go build -o ./hugowasm/hugo.wasm ./hugowasm
 
 run-wasm-node:
-	GOOS=js GOARCH=wasm go run -exec="$(GOROOT)/misc/wasm/go_js_wasm_exec" ./hugowasm
+	node hugowasm/wasm_exec.js hugowasm/hugo.wasm
+	#GOOS=js GOARCH=wasm go run -exec="$(GOROOT)/misc/wasm/go_js_wasm_exec" ./hugowasm
 
 cmd:
 	./hugo --cleanDestinationDir --config ../quickstart/config.toml --contentDir ../quickstart/content --layoutDir ../quickstart/themes/ananke/layouts --themesDir ../quickstart/themes
