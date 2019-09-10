@@ -280,7 +280,7 @@
 				
 				<option value="file112">github.com/gohugoio/hugo/output/docshelper.go (9.5%)</option>
 				
-				<option value="file113">github.com/gohugoio/hugo/output/layout.go (88.4%)</option>
+				<option value="file113">github.com/gohugoio/hugo/output/layout.go (86.3%)</option>
 				
 				<option value="file114">github.com/gohugoio/hugo/output/layout_base.go (88.2%)</option>
 				
@@ -27985,7 +27985,7 @@ func (l *LayoutHandler) For(d LayoutDescriptor, f Format) ([]string, error) <spa
         // We will get lots of requests for the same layouts, so avoid recalculations.
         key := layoutCacheKey{d, f.Name}
         l.mu.RLock()
-        if cacheVal, found := l.cache[key]; found </span><span class="cov8" title="1">{
+        if cacheVal, found := l.cache[key]; found </span><span class="cov0" title="0">{
                 l.mu.RUnlock()
                 return cacheVal, nil
         }</span>
