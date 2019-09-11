@@ -32,21 +32,15 @@
 		if (isNodeJS) {
 			global.fs = require("fs");
 
-			global.fs.statOriginal = global.fs.stat;
-			global.fs.stat = function(file, callback) {
-				console.log('Jim calling stat', file)
-				return global.fs.statOriginal(file, function() {
-					console.log('Jim stat return', arguments)
-					var retStat = arguments[1];
-					return callback(arguments[0], retStat);
-				});
-			};
-
-			global.process.cwdOriginal = global.process.cwd;
-			global.process.cwd = function(callback) {
-				console.log('Jim calling cwd')
-				return global.process.cwdOriginal(function() {
-					console.log('Jim cwd return', arguments)
+			global.fs.lstatOriginal = global.fs.lstat;
+			global.fs.lstat = function(file, options, callback) {
+				if (typeof options === 'function') {
+					callback = options
+					options = {}
+				}
+				console.log('Jim calling lstat', file, options)
+				return global.fs.lstatOriginal(file, options, function() {
+					console.log('Jim lstat return', arguments)
 					var retStat = arguments[1];
 					return callback(arguments[0], retStat);
 				});
@@ -144,15 +138,31 @@
 					retStat.ctimeMs = retStat.ctime.getTime();
 					retStat.birthtimeMs = retStat.birthtime.getTime();
 					return callback(arguments[0], retStat);
-
 				});
 			};
 
 			global.fs.statOriginal = global.fs.stat;
-			global.fs.stat = function(file, callback) {
+			global.fs.stat = function(file, callback) { // FIXME: options?
 				console.log('Jim calling stat', file)
 				return global.fs.statOriginal(file, function() {
 					console.log('Jim stat return', arguments)
+					var retStat = arguments[1];
+					if (retStat) {
+						delete retStat['fileData'];
+						retStat.atimeMs = retStat.atime.getTime();
+						retStat.mtimeMs = retStat.mtime.getTime();
+						retStat.ctimeMs = retStat.ctime.getTime();
+						retStat.birthtimeMs = retStat.birthtime.getTime();
+					}
+					return callback(arguments[0], retStat);
+				});
+			};
+
+			global.fs.lstatOriginal = global.fs.lstat;
+			global.fs.lstat = function(file, callback) {
+				console.log('Jim calling lstat', file)
+				return global.fs.lstatOriginal(file, function() {
+					console.log('Jim lstat return', arguments)
 					var retStat = arguments[1];
 					if (retStat) {
 						delete retStat['fileData'];
