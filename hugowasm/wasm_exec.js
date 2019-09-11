@@ -33,15 +33,11 @@
 			global.fs = require("fs");
 
 			global.fs.lstatOriginal = global.fs.lstat;
-			global.fs.lstat = function(file, options, callback) {
-				if (typeof options === 'function') {
-					callback = options
-					options = {}
-				}
-				console.log('Jim calling lstat', file, options)
-				return global.fs.lstatOriginal(file, options, function() {
-					console.log('Jim lstat return', arguments)
+			global.fs.lstat = function(file, callback) {
+				console.log('Jim calling lstat', file)
+				return global.fs.lstatOriginal(file, function() {
 					var retStat = arguments[1];
+					console.log('Jim lstat return', retStat)
 					return callback(arguments[0], retStat);
 				});
 			};
@@ -124,8 +120,13 @@
 					throw new Error("Not implmented");
 				}
 				// TODO: handle other cases
+				console.log('Jim open', path, flags, myflags, mode)
 
-				return global.fs.openOriginal(path, myflags, mode, callback);
+				const callback2 = function(...args) {
+					console.log('Jim open callback args', args)
+					callback(...args)
+				}
+				return global.fs.openOriginal(path, myflags, mode, callback2);
 			};
 
 			global.fs.fstatOriginal = global.fs.fstat;
@@ -162,7 +163,6 @@
 			global.fs.lstat = function(file, callback) {
 				console.log('Jim calling lstat', file)
 				return global.fs.lstatOriginal(file, function() {
-					console.log('Jim lstat return', arguments)
 					var retStat = arguments[1];
 					if (retStat) {
 						delete retStat['fileData'];
@@ -171,6 +171,7 @@
 						retStat.ctimeMs = retStat.ctime.getTime();
 						retStat.birthtimeMs = retStat.birthtime.getTime();
 					}
+					console.log('Jim lstat return', retStat)
 					return callback(arguments[0], retStat);
 				});
 			};
