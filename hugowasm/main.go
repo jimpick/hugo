@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/gohugoio/hugo/commands"
 )
 
 func main() {
 	fmt.Println("Jim1")
 	args := []string{
-		"--cleanDestinationDir",
+		// "--cleanDestinationDir",
 		"--config",
 		"../quickstart/config.toml",
 		"--contentDir",
@@ -17,6 +18,8 @@ func main() {
 		"../quickstart/themes/ananke/layouts",
 		"--themesDir",
 		"../quickstart/themes",
+		"--noChmod",
+		"--noTimes",
 	}
 	commands.Execute(args)
 }

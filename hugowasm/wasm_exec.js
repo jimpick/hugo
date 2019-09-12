@@ -12,6 +12,9 @@
 	// - Electron
 	// - Parcel
 
+	const fds = {}
+	let numFds = 0
+
 	if (typeof global !== "undefined") {
 		// global already exists
 	} else if (typeof window !== "undefined") {
@@ -32,15 +35,32 @@
 		if (isNodeJS) {
 			global.fs = require("fs");
 
-			global.fs.lstatOriginal = global.fs.lstat;
-			global.fs.lstat = function(file, callback) {
-				console.log('Jim calling lstat', file)
-				return global.fs.lstatOriginal(file, function() {
-					var retStat = arguments[1];
-					console.log('Jim lstat return', retStat)
-					return callback(arguments[0], retStat);
+			global.fs.openOriginal = global.fs.open
+			global.fs.open = function(path, flags, mode, callback) {
+				console.log('Jim open', path, flags, flags, mode)
+				const callback2 = function(...args) {
+					console.log('Jim open callback args', path, args)
+					callback(...args)
+				}
+				return global.fs.openOriginal(path, flags, mode, callback2);
+			};
+
+			global.fs.closeOriginal = global.fs.close;
+			global.fs.close = function(fd, callback) {
+				console.log('Jim close fd', fd)
+				return global.fs.closeOriginal(fd, function() {
+					return callback(...arguments);
+				});
+			}
+
+			global.fs.fstatOriginal = global.fs.fstat;
+			global.fs.fstat = function(fd, callback) {
+				return global.fs.fstatOriginal(fd, function() {
+					console.log('Jim fstat fd', fd, arguments[1])
+					return callback(...arguments);
 				});
 			};
+
 		} else {
 			var myfs = global.BrowserFS.BFSRequire('fs');
 			global.Buffer = global.BrowserFS.BFSRequire('buffer').Buffer;
@@ -123,6 +143,13 @@
 				console.log('Jim open', path, flags, myflags, mode)
 
 				const callback2 = function(...args) {
+					if (args[0] && typeof args[0] === 'object' && args[0].code === 'EISDIR') {
+						const newFd = numFds + 1000000
+						fds[newFd] = { path }
+						numFds += 1
+						console.log('Jim open callback fake fd', newFd)
+						return callback(null, newFd)
+					}
 					console.log('Jim open callback args', args)
 					callback(...args)
 				}
@@ -131,6 +158,15 @@
 
 			global.fs.fstatOriginal = global.fs.fstat;
 			global.fs.fstat = function(fd, callback) {
+				console.log('Jim calling fstat', fd)
+				if (fd >= 1000000) {
+					console.log('Jim return fake directory stat')
+					const stats = {
+						 mode: 16877,
+						 isDirectory: () => { return true }
+					}
+					return callback(null, stats) // Directory
+				}
 				return global.fs.fstatOriginal(fd, function() {
 					var retStat = arguments[1];
 					delete retStat['fileData'];
