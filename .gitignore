@@ -19,6 +19,7 @@ dock.sh
 
 GoBuilds
 dist
+!hugowasm/**/dist
 
 resources/sunset.jpg
 
