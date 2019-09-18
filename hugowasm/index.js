@@ -1,3 +1,38 @@
+import {html, render} from 'https://unpkg.com/lit-html?module'
+
+function mainView (state) {
+  let content = '!!!'
+  if (state.machine == 'INIT') {
+    content = 'Loading wasm... (25MB!)'
+  }
+  if (state.machine == 'READY') {
+    content = html`<button @click=${state.build}>
+      Run Hugo to build blog and save to IPFS
+    </button>`
+  }
+  if (state.machine == 'BUILDING') {
+    content = 'Building...'
+  }
+  if (state.machine == 'ADDING_TO_IPFS') {
+    content = 'Adding to IPFS...'
+  }
+  if (state.machine == 'PUBLISHED') {
+    content = html`
+      <p>Published.</p>
+      <p><i>Suggestion: Now pin it somewhere...</i></p>
+    `
+  }
+  return html`
+    <h1>hugo-wasm demo</h1>
+
+    ${content}
+  `
+}
+
+function r (state) {
+  render(mainView(state), document.body)
+}
+
 function initBrowserFs () {
   const promise = new Promise((resolve, reject) => {
     BrowserFS.configure({
@@ -23,6 +58,10 @@ function initBrowserFs () {
 }
 
 async function run () {
+  const state = {
+    machine: 'INIT'
+  }
+  r(state)
   const node = await window.Ipfs.create()
   const [ fs, Buffer ] = await initBrowserFs()
   const go = new Go()
@@ -33,7 +72,32 @@ async function run () {
     fetch("hugo.wasm"),
     go.importObject
   )
-  go.run(instance)
+  state.machine = 'READY'
+  state.build = build
+  r(state)
+
+  async function build (e) {
+    runBuild()
+    e.preventDefault()
+
+    async function runBuild () {
+      state.machine = 'BUILDING'
+      r(state)
+      await go.run(instance)
+      await addToIpfs()
+    }
+  }
+
+  async function addToIpfs () {
+    state.machine = 'ADDING_TO_IPFS'
+    r(state)
+    setTimeout(finished, 5000)
+  }
+
+  async function finished () {
+    state.machine = 'PUBLISHED'
+    r(state)
+  }
 }
 
 run()
