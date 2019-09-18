@@ -1,11 +1,11 @@
-// import { readdirSync, mkdirSync, copyFileSync } from "fs"
-
 function initBrowserFs () {
   const promise = new Promise((resolve, reject) => {
     BrowserFS.configure({
       fs: "MountableFileSystem",
       options: {
-        "/quickstart": { fs: "HTTPRequest", options: { baseUrl: "/quickstart"} },
+        "/quickstart": {
+          fs: "HTTPRequest", options: { baseUrl: "/quickstart"}
+        },
         "/public": { fs: "InMemory" },
         "/tmp": { fs: "InMemory" }
       }
@@ -16,15 +16,6 @@ function initBrowserFs () {
       // Otherwise, BrowserFS is ready-to-use!
       var fs = BrowserFS.BFSRequire('fs')
       var Buffer = BrowserFS.BFSRequire('buffer').Buffer
-      /*
-      fs.readFile('/quickstart/config.toml', (err, data) => {
-        if (err) {
-          console.error('Jim5 err', err)
-          return
-        }
-        console.log('Jim5', data.toString())
-      })
-      */
       resolve([fs, Buffer])
     })
   })
@@ -32,6 +23,7 @@ function initBrowserFs () {
 }
 
 async function run () {
+  const node = await window.Ipfs.create()
   const [ fs, Buffer ] = await initBrowserFs()
   const go = new Go()
   fs.stat2 = function (...args) {
