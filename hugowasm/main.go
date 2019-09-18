@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Jim1")
+	fmt.Println("Hardcoded args")
 	args := []string{
 		// "--cleanDestinationDir",
 		"--config",

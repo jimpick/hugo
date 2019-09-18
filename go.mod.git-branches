@@ -35,4 +35,4 @@ require (
 	gopkg.in/yaml.v2 v2.2.2
 )
 
-replace github.com/spf13/viper => github.com/jimpick/viper v1.4.1-0.20190918170900-3da37aa301b8
+replace github.com/spf13/viper => github.com/jimpick/viper jim/wasm
