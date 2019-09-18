@@ -81,6 +81,11 @@ async function run () {
     e.preventDefault()
 
     async function runBuild () {
+      const bytes = window.crypto.getRandomValues(new Uint8Array(3))
+      const toHex = n => n.toString('16').padStart(2, '0')
+
+      state.jobId = Array.prototype.map.call(bytes, toHex).join('')
+      console.log('Building job', state.jobId)
       state.machine = 'BUILDING'
       r(state)
       await go.run(instance)
