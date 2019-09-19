@@ -3,7 +3,7 @@ import {html, render} from 'https://unpkg.com/lit-html?module'
 function mainView (state) {
   let content = '!!!'
   if (state.machine == 'INIT') {
-    content = 'Loading wasm... (25MB!)'
+    content = 'Loading wasm... (25MB -> 6MB compressed!!)'
   }
   if (state.machine == 'READY') {
     content = html`<button @click=${state.build}>
