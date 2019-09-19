@@ -15,10 +15,16 @@ function mainView (state) {
   }
   if (state.machine == 'ADDING_TO_IPFS') {
     content = 'Adding to IPFS...'
+    if (state.numFiles > 0) {
+      content += ` (${state.added} / ${state.numFiles} files)`
+    }
   }
   if (state.machine == 'PUBLISHED') {
     content = html`
-      <p>Published.</p>
+      <p>Published ${state.added} files.</p>
+      <p><a href="https://ipfs.io/ipfs/${state.cid}" target="_blank">
+        https://ipfs.io/ipfs/${state.cid}
+      </a></p>
       <p><i>Suggestion: Now pin it somewhere...</i></p>
     `
   }
@@ -62,7 +68,7 @@ async function run () {
     machine: 'INIT'
   }
   r(state)
-  const node = await window.Ipfs.create()
+  const ipfs = await window.Ipfs.create()
   const [ fs, Buffer ] = await initBrowserFs()
   const go = new Go()
   fs.stat2 = function (...args) {
@@ -96,7 +102,38 @@ async function run () {
   async function addToIpfs () {
     state.machine = 'ADDING_TO_IPFS'
     r(state)
-    setTimeout(finished, 5000)
+
+    const files = []
+    walkDir('')
+    state.numFiles = files.length
+    state.added = 0
+    r(state)
+    const mfsDir = `/hugo/${state.jobId}`
+    for (const file of files) {
+      const data = fs.readFileSync(`/public${file}`)
+      await ipfs.files.write(
+        `${mfsDir}${file}`,
+        data,
+        { create: true, parents: true }
+      )
+      state.added += 1
+      r(state)
+    }
+    const mfsStats = await ipfs.files.stat(mfsDir)
+    state.cid = mfsStats.hash
+    await finished()
+
+    function walkDir (dir) {
+      const dirFiles = fs.readdirSync(`/public/${dir}`)
+      for (const file of dirFiles) {
+        const stats = fs.statSync(`/public/${dir}/${file}`)
+        if (stats.isDirectory()) {
+          walkDir(`${dir}/${file}`)
+        } else {
+          files.push(`${dir}/${file}`)
+        }
+      }
+    }
   }
 
   async function finished () {
