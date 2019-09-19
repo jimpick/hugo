@@ -22,8 +22,9 @@ function mainView (state) {
   if (state.machine == 'PUBLISHED') {
     content = html`
       <p>Published ${state.added} files.</p>
-      <p><a href="https://ipfs.io/ipfs/${state.cid}" target="_blank">
-        https://ipfs.io/ipfs/${state.cid}
+      <p>CID: ${state.cid}</p>
+      <p><a href="https://${state.cid}.ipfs.dweb.link/" target="_blank">
+        https://${state.cid}.ipfs.dweb.link/
       </a></p>
       <p><i>Suggestion: Now pin it somewhere...</i></p>
     `
@@ -69,6 +70,7 @@ async function run () {
   }
   r(state)
   const ipfs = await window.Ipfs.create()
+  const CID = window.Ipfs.CID
   const [ fs, Buffer ] = await initBrowserFs()
   const go = new Go()
   fs.stat2 = function (...args) {
@@ -120,7 +122,7 @@ async function run () {
       r(state)
     }
     const mfsStats = await ipfs.files.stat(mfsDir)
-    state.cid = mfsStats.hash
+    state.cid = (new CID(mfsStats.hash)).toV1()
     await finished()
 
     function walkDir (dir) {
