@@ -26,7 +26,13 @@ ipfs get QmSNEDmpw1snSE968LUpNWFfQavVUzyMHmqGZbzk1eueq7
 
   }
   if (state.machine == 'DOWNLOADING') {
-    content = 'Downloading from IPFS...'
+    content = 'Downloading from IPFS'
+    const dots = Math.floor((Date.now() - state.start) / 1000)
+    content += '.'.repeat(dots)
+    content = html`
+      <div>${content}</div>
+      <div>${state.numSourceFiles} Files downloaded</div>
+      <div>${state.bytesSourceFiles} bytes downloaded</div>`
   }
   if (state.machine == 'BUILDING') {
     content = 'Building...'
@@ -124,8 +130,21 @@ async function run () {
     e.preventDefault()
     // await build()
     state.machine = 'DOWNLOADING'
+    state.start = Date.now()
     r(state)
-    setTimeout(build, 3000)
+    const intervalId = setInterval(() => r(state), 1000)
+    const stream = ipfs.getReadableStream(cid)
+    state.numSourceFiles = 0
+    state.bytesSourceFiles = 0
+    stream.on('data', file => {
+      console.log('Jim file', file.path, file)
+      state.numSourceFiles += 1
+      state.bytesSourceFiles += file.size
+    })
+    setTimeout(() => {
+      clearInterval(intervalId)
+      build()
+    }, 10000)
   }
 
   async function build () {
