@@ -6,9 +6,27 @@ function mainView (state) {
     content = 'Loading wasm... (25MB -> 6MB compressed!!)'
   }
   if (state.machine == 'READY') {
-    content = html`<button @click=${state.build}>
+    const cidEle = document.getElementById('cid')
+    const cid = cidEle ? cidEle.value : ''
+    content = html`
+    <div class="instructions">
+      Want to make a blog? Download this Hugo blog template with IPFS:
+        <pre>
+ipfs get QmSNEDmpw1snSE968LUpNWFfQavVUzyMHmqGZbzk1eueq7
+        </pre>
+      When you are done, just use "ipfs add -r ." to upload and
+      paste the CID below.
+    </div>
+    <div>
+    CID: <input type="text" id="cid" size="70" @input=${rerender}>
+    </div>
+    <button @click=${state.download} ?disabled=${!state.isCidValid(cid)}>
       Run Hugo to build blog and save to IPFS
     </button>`
+
+  }
+  if (state.machine == 'DOWNLOADING') {
+    content = 'Downloading from IPFS...'
   }
   if (state.machine == 'BUILDING') {
     content = 'Building...'
@@ -22,10 +40,12 @@ function mainView (state) {
   if (state.machine == 'PUBLISHED') {
     content = html`
       <p>Published ${state.added} files.</p>
-      <p>CID: ${state.cid}</p>
-      <p><a href="https://${state.cid}.ipfs.dweb.link/" target="_blank">
-        https://${state.cid}.ipfs.dweb.link/
-      </a></p>
+      <div class="finalLinks">
+        <p>CID: ${state.cid}</p>
+        <p><a href="https://${state.cid}.ipfs.dweb.link/" target="_blank">
+          https://${state.cid}.ipfs.dweb.link/
+        </a></p>
+      </div>
       <p><i>Suggestion: Now pin it somewhere...</i></p>
     `
   }
@@ -34,6 +54,10 @@ function mainView (state) {
 
     ${content}
   `
+
+  function rerender () {
+    r(state)
+  }
 }
 
 function r (state) {
@@ -81,12 +105,31 @@ async function run () {
     go.importObject
   )
   state.machine = 'READY'
-  state.build = build
+  state.isCidValid = isCidValid
+  state.download = download
   r(state)
 
-  async function build (e) {
-    runBuild()
+  function isCidValid (cidString) {
+    try {
+      const cid = new CID(cidString)
+      return true
+    } catch (e) {
+      return false
+    }
+  }
+
+  async function download (e) {
+    const cidEle = document.getElementById('cid')
+    const cid = new CID(cidEle.value)
     e.preventDefault()
+    // await build()
+    state.machine = 'DOWNLOADING'
+    r(state)
+    setTimeout(build, 3000)
+  }
+
+  async function build () {
+    runBuild()
 
     async function runBuild () {
       const bytes = window.crypto.getRandomValues(new Uint8Array(3))
