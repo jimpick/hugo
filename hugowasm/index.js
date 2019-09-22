@@ -62,6 +62,10 @@ ipfs get -o blog QmdxupX32R9Ra2TaEY7Gpf4CTAa5F7aKyHpB3ajp14fkuV
     <h1>hugo-wasm demo</h1>
 
     ${content}
+
+    <div class="footer">
+    GitHub: <a href="https://github.com/jimpick/hugo/tree/jim/wasm-js-ipfs">jimpick/hugo#wasm-js-ipfs</a>
+    </div>
   `
 
   function rerender () {
