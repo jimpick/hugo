@@ -112,10 +112,21 @@ async function run () {
   const CID = window.Ipfs.CID
   const [ fs, Buffer ] = await initBrowserFs()
   const go = new Go()
-  const { instance } = await WebAssembly.instantiateStreaming(
-    fetch("hugo.wasm"),
-    go.importObject
-  )
+  let instance
+  if (!WebAssembly) {
+    alert("No WASM!")
+  } else if (WebAssembly.instantiateStreaming) {
+    const result = await WebAssembly.instantiateStreaming(
+      fetch("hugo.wasm"),
+      go.importObject
+    )
+    instance = result.instance
+  } else {
+    const response = await fetch("hugo.wasm")
+    const bytes = await response.arrayBuffer()
+    const result = await WebAssembly.instantiate(bytes, go.importObject)
+    instance = result.instance
+  }
   state.machine = 'READY'
   state.isCidValid = isCidValid
   state.download = download
