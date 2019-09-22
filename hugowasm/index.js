@@ -12,13 +12,13 @@ function mainView (state) {
     <div class="instructions">
       Want to make a blog? Download this Hugo blog template with IPFS:
         <pre>
-ipfs get QmSNEDmpw1snSE968LUpNWFfQavVUzyMHmqGZbzk1eueq7
+ipfs get -o blog QmdxupX32R9Ra2TaEY7Gpf4CTAa5F7aKyHpB3ajp14fkuV
         </pre>
-      When you are done, just use "ipfs add -r ." to upload and
+      When you are done, just use "ipfs add -r blog" to upload and
       paste the CID below.
     </div>
     <div>
-    CID: <input type="text" id="cid" size="70" @input=${rerender}>
+    CID: <input type="text" id="cid" size="70" @input=${rerender} autocomplete="off" spellcheck="false">
     </div>
     <button @click=${state.download} ?disabled=${!state.isCidValid(cid)}>
       Run Hugo to build blog and save to IPFS
@@ -51,6 +51,9 @@ ipfs get QmSNEDmpw1snSE968LUpNWFfQavVUzyMHmqGZbzk1eueq7
         <p><a href="https://${state.cid}.ipfs.dweb.link/" target="_blank">
           https://${state.cid}.ipfs.dweb.link/
         </a></p>
+        <p><a href="https://ipfs.io/ipfs/${state.cid}" target="_blank">
+          https://ipfs.io/ipfs/${state.cid}/
+        </a></p>
       </div>
       <p><i>Suggestion: Now pin it somewhere...</i></p>
     `
@@ -75,9 +78,12 @@ function initBrowserFs () {
     BrowserFS.configure({
       fs: "MountableFileSystem",
       options: {
+        /*
         "/quickstart": {
           fs: "HTTPRequest", options: { baseUrl: "/quickstart"}
         },
+        */
+        "/quickstart": { fs: "InMemory" },
         "/public": { fs: "InMemory" },
         "/tmp": { fs: "InMemory" }
       }
@@ -99,13 +105,13 @@ async function run () {
     machine: 'INIT'
   }
   r(state)
-  const ipfs = await window.Ipfs.create()
+
+  const ipfs = window.ipfs ? await window.ipfs.enable() : await window.Ipfs.create()
+
+  // ipfs.swarm.connect('/dns4/ipfs.jimpick.com/tcp/4006/wss/ipfs/QmScdku7gc3VvfZZvT8kHU77bt6bnH3PnGXkyFRZ17g9EG')
   const CID = window.Ipfs.CID
   const [ fs, Buffer ] = await initBrowserFs()
   const go = new Go()
-  fs.stat2 = function (...args) {
-    console.log('args', args)
-  }
   const { instance } = await WebAssembly.instantiateStreaming(
     fetch("hugo.wasm"),
     go.importObject
@@ -125,36 +131,70 @@ async function run () {
   }
 
   async function download (e) {
+    const bytes = window.crypto.getRandomValues(new Uint8Array(3))
+    const toHex = n => n.toString('16').padStart(2, '0')
+    state.jobId = Array.prototype.map.call(bytes, toHex).join('')
+
     const cidEle = document.getElementById('cid')
     const cid = new CID(cidEle.value)
     e.preventDefault()
     // await build()
     state.machine = 'DOWNLOADING'
+    state.numSourceFiles = 0
+    state.bytesSourceFiles = 0
     state.start = Date.now()
     r(state)
     const intervalId = setInterval(() => r(state), 1000)
-    const stream = ipfs.getReadableStream(cid)
-    state.numSourceFiles = 0
-    state.bytesSourceFiles = 0
-    stream.on('data', file => {
-      console.log('Jim file', file.path, file)
-      state.numSourceFiles += 1
-      state.bytesSourceFiles += file.size
-    })
-    setTimeout(() => {
+    if (ipfs.getReadableStream) {
+      const stream = ipfs.getReadableStream(cid)
+      stream.on('data', file => {
+        console.log('Jim file', file.path, file)
+        const shortPath = file.path.replace(/^[^\/]+/, '')
+        if (shortPath !== '') {
+          if (file.type === 'dir') {
+            console.log('Jim mkdir', shortPath)
+            fs.mkdirSync(`/quickstart${shortPath}`)
+          } else {
+            console.log('Jim file', shortPath, file.size)
+            file.content.on('data', data => {
+              fs.writeFileSync(`/quickstart${shortPath}`, data)
+              state.numSourceFiles += 1
+              state.bytesSourceFiles += file.size
+            })
+            file.content.resume()
+          }
+        }
+      })
+      stream.on('end', () => {
+        clearInterval(intervalId)
+        build()
+      })
+    } else {
+      const files = await ipfs.get(cid)
+      for (const file of files) {
+        console.log('Jim file', file)
+        const shortPath = file.path.replace(/^[^\/]+/, '')
+        if (shortPath !== '') {
+          if (!file.content) {
+            console.log('Jim mkdir', shortPath)
+            fs.mkdirSync(`/quickstart${shortPath}`)
+          } else {
+            console.log('Jim file', shortPath, file.content.length)
+            fs.writeFileSync(`/quickstart${shortPath}`, file.content)
+            state.numSourceFiles += 1
+            state.bytesSourceFiles += file.content.length
+          }
+        }
+      }
       clearInterval(intervalId)
-      build()
-    }, 10000)
+      await build()
+    }
   }
 
   async function build () {
     runBuild()
 
     async function runBuild () {
-      const bytes = window.crypto.getRandomValues(new Uint8Array(3))
-      const toHex = n => n.toString('16').padStart(2, '0')
-
-      state.jobId = Array.prototype.map.call(bytes, toHex).join('')
       console.log('Building job', state.jobId)
       state.machine = 'BUILDING'
       r(state)
